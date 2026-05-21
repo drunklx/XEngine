@@ -1,0 +1,3 @@
+[submodule "XEngine/vendor/spdLog"]
+	path = XEngine/vendor/spdLog
+	url = https://gitcode.com/GitHub_Trending/sp/spdlog.git

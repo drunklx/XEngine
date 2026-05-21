@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>G:\Visuals\repos\XEngine\bin\Debug-x64\XEngine\XEngine.dll</FullPath>
+      <FullPath>G:\Visuals\repos\XEngine\bin\Debug-windows-x86_64\XEngine\XEngine.dll</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
