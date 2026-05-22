@@ -27,6 +27,9 @@ project "XEngine"
 	-- 编译中间文件目录（.obj 等）
 	objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
+	pchheader "xepch.h"			-- 预编译头文件
+	pchsource "XEngine/src/xepch.cpp"	-- 预编译头文件的源文件
+
 	-- 包含的源文件：所有 .h 和 .cpp 文件
 	files
 	{
@@ -37,7 +40,8 @@ project "XEngine"
 	-- 头文件包含目录（让编译器能找到 spdlog）
 	includedirs
 	{
-		"%{prj.name}/vendor/spdlog/include"
+		"%{prj.name}/vendor/spdlog/include",
+		"%{prj.name}/src"
 	}
 
 -- ==================== Windows 平台配置 ====================

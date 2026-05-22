@@ -31,10 +31,16 @@
     <ClInclude Include="src\XEngine\Events\MouseEvent.h">
       <Filter>XEngine\Events</Filter>
     </ClInclude>
+    <ClInclude Include="src\XEngine\Log.h">
+      <Filter>XEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\xepch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\XEngine\Application.cpp">
+      <Filter>XEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XEngine\Log.cpp">
       <Filter>XEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\xepch.cpp" />
