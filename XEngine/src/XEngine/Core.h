@@ -9,3 +9,5 @@
 #else 
 	#error XEngine only supports Windows!
 #endif // X_PLATFORM_WINDOWS
+
+#define BIT(x) (1 << x)
