@@ -9,3 +9,14 @@
 #else 
 	#error XEngine only supports Windows!
 #endif // X_PLATFORM_WINDOWS
+
+
+#ifdef X_ENABLE_ASSERTS
+	#define X_ASSERT(x, ...) { if(!(x)) { X_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#define X_CORE_ASSERT(x, ...) { if(!(x)) { X_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
+#else
+#define X_ASSERT(x, ...)
+#define X_CORE_ASSERT(x, ...)
+#endif // X_ENABLE_ASSERTS
+
+#define BIT(x) (1 << x)

@@ -14,31 +14,46 @@ workspace "XEngine"
 	-- 例子：Debug-Windows-x64
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	IncludeDir={}
+	IncludeDir["GLFW"] = "XEngine/vendor/GLFW/include"
+
+	include "XEngine/vendor/GLFW"
 -- ======================================================
 -- 项目1：XEngine 引擎核心库（动态库 DLL）
 -- ======================================================
 project "XEngine"
-	location "XEngine"			-- 项目文件放在 XEngine 文件夹
-	kind "SharedLib"			-- 编译类型：动态链接库（.dll）
-	language "C++"				-- 使用 C++ 语言
+location "XEngine"			-- 项目文件放在 XEngine 文件夹
+kind "SharedLib"			-- 编译类型：动态链接库（.dll）
+language "C++"				-- 使用 C++ 语言
 
-	-- 最终生成的 exe/dll 输出目录
-	targetdir ("bin/"..outputdir.."/%{prj.name}")
-	-- 编译中间文件目录（.obj 等）
-	objdir ("bin-int/"..outputdir.."/%{prj.name}")
+-- 最终生成的 exe/dll 输出目录
+targetdir ("bin/"..outputdir.."/%{prj.name}")
+-- 编译中间文件目录（.obj 等）
+objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
-	-- 包含的源文件：所有 .h 和 .cpp 文件
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
+pchheader "xepch.h"			-- 预编译头文件
+pchsource "XEngine/src/xepch.cpp"	-- 预编译头文件的源文件
 
-	-- 头文件包含目录（让编译器能找到 spdlog）
-	includedirs
-	{
-		"%{prj.name}/vendor/spdlog/include"
-	}
+-- 包含的源文件：所有 .h 和 .cpp 文件
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
+
+-- 头文件包含目录（让编译器能找到 spdlog）
+includedirs
+{
+	"%{prj.name}/vendor/spdlog/include",
+	"%{prj.name}/src",
+	"%{IncludeDir.GLFW}"
+}
+
+links
+{
+	"GLFW",	-- 链接 GLFW 库（它会在 GLFW 项目里生成）
+	"opengl32.lib" -- 链接 Windows 的 OpenGL 库
+}
 
 -- ==================== Windows 平台配置 ====================
 filter "system:windows"
@@ -62,14 +77,17 @@ filter "system:windows"
 -- ==================== 不同编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"			-- 定义调试宏
+	buildoptions "/MDd"
 	symbols "On"				-- 生成调试信息
 
 filter "configurations:Release"
 	defines "X_RELEASE"			-- 定义发布宏
+	buildoptions "/MD"
 	optimize "On"				-- 开启优化
 
 filter "configurations:Dist"
 	defines "X_DIST"			-- 定义发行宏
+	buildoptions "/MD"
 	optimize "Full"				-- 全量优化
 
 -- ======================================================
@@ -119,12 +137,15 @@ filter "system:windows"
 -- ==================== 编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"
+	buildoptions "/MDd"
 	symbols "On"
 
 filter "configurations:Release"
 	defines "X_RELEASE"
+	buildoptions "/MD"
 	optimize "On"
 
 filter "configurations:Dist"
 	defines "X_DIST"
+	buildoptions "/MDd"
 	optimize "Full"

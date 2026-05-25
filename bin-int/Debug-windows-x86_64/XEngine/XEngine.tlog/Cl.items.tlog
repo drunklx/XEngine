@@ -1,2 +1,6 @@
+G:\Visuals\repos\XEngine\XEngine\src\Platform\WindowsWindow.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsWindow.obj
 G:\Visuals\repos\XEngine\XEngine\src\XEngine\Application.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Application.obj
+G:\Visuals\repos\XEngine\XEngine\src\XEngine\Layer.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Layer.obj
+G:\Visuals\repos\XEngine\XEngine\src\XEngine\LayerStack.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\LayerStack.obj
 G:\Visuals\repos\XEngine\XEngine\src\XEngine\Log.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Log.obj
+G:\Visuals\repos\XEngine\XEngine\src\xepch.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\xepch.obj

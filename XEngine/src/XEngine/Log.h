@@ -1,6 +1,11 @@
 #pragma once
 #include "Core.h"
+
 #include "spdlog/spdlog.h"
+// 让 fmt 使用 operator<< 支持（使有 operator<< 的类型可被 fmt 格式化）
+#include <spdlog/fmt/ostr.h>
+
+
 namespace XEngine{
 	class X_API Log
 	{
@@ -21,8 +26,6 @@ namespace XEngine{
 #define X_CORE_WARN(...)     ::XEngine::Log::GetCoreLogger()->warn(__VA_ARGS__)
 #define X_CORE_ERROR(...)    ::XEngine::Log::GetCoreLogger()->error(__VA_ARGS__)
 #define X_CORE_FATAL(...)    ::XEngine::Log::GetCoreLogger()->fatal(__VA_ARGS__)
-
-
 
 #define X_TRACE(...)   ::XEngine::Log::GetClientLogger()->trace(__VA_ARGS__)
 #define X_INFO(...)    ::XEngine::Log::GetClientLogger()->info(__VA_ARGS__)

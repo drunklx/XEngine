@@ -1,5 +1,5 @@
-#include "Log.h"
-#include<spdlog/spdlog.h>
+#include "xepch.h"
+
 #include <spdlog/sinks/stdout_color_sinks.h> // 添加此行以包含 stdout_color_mt 的声明
 
 namespace XEngine
