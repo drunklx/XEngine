@@ -22,7 +22,7 @@ namespace XEngine {
         EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
     protected:
-        // 受保护构造函数：只能被子类调用，禁止直接创建KeyEvent对象
+        // 受保护构造函数：只能被子类调用，禁止直接创 建                  KeyEvent对象
         KeyEvent(int keycode)
             : m_KeyCode(keycode) {
         }

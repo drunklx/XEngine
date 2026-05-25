@@ -1,102 +1,107 @@
-// ·ÀÖ¹Í·ÎÄ¼ş±»ÖØ¸´°üº¬£¨ÏÖ´úC++Í¨ÓÃĞ´·¨£©
+ï»¿// é˜²æ­¢å¤´æ–‡ä»¶è¢«é‡å¤åŒ…å«ï¼ˆç°ä»£C++é€šç”¨å†™æ³•ï¼‰
 #pragma once
 
-// °üº¬ÒıÇæºËĞÄÍ·ÎÄ¼ş£¨Core.h ¶¨ÒåÁË X_API µ¼³öºê¡¢»ù´¡ºêµÈ£©
+// åŒ…å«å¼•æ“æ ¸å¿ƒå¤´æ–‡ä»¶ï¼ˆCore.h å®šä¹‰äº† X_API å¯¼å‡ºå®ã€åŸºç¡€å®ç­‰ï¼‰
 #include"../Core.h"
+#include <spdlog/fmt/ostr.h>  // å¿…é¡»åŒ…å«è¿™ä¸ªå¤´æ–‡ä»¶
 
-
-// ÒıÇæÃüÃû¿Õ¼ä£¬±ÜÃâÈ«¾ÖÃüÃû³åÍ»
+// å¼•æ“å‘½åç©ºé—´ï¼Œé¿å…å…¨å±€å‘½åå†²çª
 namespace XEngine {
 
-	// ÊÂ¼şÀàĞÍÃ¶¾Ù£¨Ç¿ÀàĞÍÃ¶¾Ù class enum£¬¸ü°²È«£©
+	// äº‹ä»¶ç±»å‹æšä¸¾ï¼ˆå¼ºç±»å‹æšä¸¾ class enumï¼Œæ›´å®‰å…¨ï¼‰
 	enum class EventType
 	{
-		None = 0,                       // ÎŞÊÂ¼ş
-		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,  // ´°¿ÚÏà¹ØÊÂ¼ş
-		AppTick, AppUpdate, AppRender,  // Ó¦ÓÃ³ÌĞòÉúÃüÖÜÆÚÊÂ¼ş
-		KeyPressed, KeyReleased, KeyTyped,  // ¼üÅÌÊäÈëÊÂ¼ş
-		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled    // Êó±êÊäÈëÊÂ¼ş
+		None = 0,                       // æ— äº‹ä»¶
+		WindowClose, WindowResize, WindowFocus, WindowLostFocus, WindowMoved,  // çª—å£ç›¸å…³äº‹ä»¶
+		AppTick, AppUpdate, AppRender,  // åº”ç”¨ç¨‹åºç”Ÿå‘½å‘¨æœŸäº‹ä»¶
+		KeyPressed, KeyReleased, KeyTyped,  // é”®ç›˜è¾“å…¥äº‹ä»¶
+		MouseButtonPressed, MouseButtonReleased, MouseMoved, MouseScrolled    // é¼ æ ‡è¾“å…¥äº‹ä»¶
 	};
 
-	// ÊÂ¼ş·ÖÀàÃ¶¾Ù£¨Ê¹ÓÃÎ»±ê¼Ç£¬Ò»¸öÊÂ¼ş¿ÉÒÔÊôÓÚ¶à¸ö·ÖÀà£©
+	// äº‹ä»¶åˆ†ç±»æšä¸¾ï¼ˆä½¿ç”¨ä½æ ‡è®°ï¼Œä¸€ä¸ªäº‹ä»¶å¯ä»¥å±äºå¤šä¸ªåˆ†ç±»ï¼‰
 	enum EventCategory
 	{
-		None = 0,                        // ÎŞ·ÖÀà
-		EventCategoryApplication = BIT(0),  // Ó¦ÓÃ³ÌĞòÀàÊÂ¼ş
-		EventCategoryInput = BIT(1),        // ÊäÈëÀàÊÂ¼ş
-		EventCategoryKeyboard = BIT(2),     // ¼üÅÌÀàÊÂ¼ş
-		EventCategoryMouse = BIT(3),        // Êó±êÒÆ¶¯ÀàÊÂ¼ş
-		EventCategoryMouseButton = BIT(4)   // Êó±ê°´¼üÀàÊÂ¼ş
+		None = 0,                        // æ— åˆ†ç±»
+		EventCategoryApplication = BIT(0),  // åº”ç”¨ç¨‹åºç±»äº‹ä»¶
+		EventCategoryInput = BIT(1),        // è¾“å…¥ç±»äº‹ä»¶
+		EventCategoryKeyboard = BIT(2),     // é”®ç›˜ç±»äº‹ä»¶
+		EventCategoryMouse = BIT(3),        // é¼ æ ‡ç§»åŠ¨ç±»äº‹ä»¶
+		EventCategoryMouseButton = BIT(4)   // é¼ æ ‡æŒ‰é”®ç±»äº‹ä»¶
 	};
 
-	// ÊÂ¼şÀàĞÍºê£º¸ø¾ßÌåÊÂ¼şÀà×Ô¶¯Éú³É»ñÈ¡ÊÂ¼şÀàĞÍ¡¢Ãû³ÆµÄ¾²Ì¬/Ğéº¯Êı
-	// ## ÊÇºêÆ´½Ó·ûºÅ£¬# ÊÇ°Ñ²ÎÊı×ª×Ö·û´®
+	// äº‹ä»¶ç±»å‹å®ï¼šç»™å…·ä½“äº‹ä»¶ç±»è‡ªåŠ¨ç”Ÿæˆè·å–äº‹ä»¶ç±»å‹ã€åç§°çš„é™æ€/è™šå‡½æ•°
+	// ## æ˜¯å®æ‹¼æ¥ç¬¦å·ï¼Œ# æ˜¯æŠŠå‚æ•°è½¬å­—ç¬¦ä¸²
 #define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
 								virtual EventType GetEventType() const override { return GetStaticType(); }\
 								virtual const char* GetName() const override { return #type; }
 
-	// ÊÂ¼ş·ÖÀàºê£º¸ø¾ßÌåÊÂ¼şÀà×Ô¶¯Éú³É»ñÈ¡·ÖÀà±ê¼ÇµÄĞéº¯Êı
+	// äº‹ä»¶åˆ†ç±»å®ï¼šç»™å…·ä½“äº‹ä»¶ç±»è‡ªåŠ¨ç”Ÿæˆè·å–åˆ†ç±»æ ‡è®°çš„è™šå‡½æ•°
 #define EVENT_CLASS_CATEGORY(category) virtual int GetCategoryFlags() const override { return category; }
 
-	// ÊÂ¼ş»ùÀà£¨ËùÓĞ¾ßÌåÊÂ¼ş¶¼¼Ì³Ğ´ËÀà£©¡ª¡ª ÒıÇæµ¼³öÀà X_API
+	// äº‹ä»¶åŸºç±»ï¼ˆæ‰€æœ‰å…·ä½“äº‹ä»¶éƒ½ç»§æ‰¿æ­¤ç±»ï¼‰â€”â€” å¼•æ“å¯¼å‡ºç±» X_API
 	class X_API Event
 	{
+		friend class EventDispatcher;  // äº‹ä»¶åˆ†å‘å™¨éœ€è¦è®¿é—®äº‹ä»¶çš„ m_Handled æ ‡è®°
 	public:
-		// ´¿Ğéº¯Êı£º±ØĞëÓÉ×ÓÀàÊµÏÖ£¬»ñÈ¡ÊÂ¼şÀàĞÍ
+		// çº¯è™šå‡½æ•°ï¼šå¿…é¡»ç”±å­ç±»å®ç°ï¼Œè·å–äº‹ä»¶ç±»å‹
 		virtual EventType GetEventType() const = 0;
-		// ´¿Ğéº¯Êı£º±ØĞëÓÉ×ÓÀàÊµÏÖ£¬»ñÈ¡ÊÂ¼şÃû³Æ£¨ÓÃÓÚµ÷ÊÔ¡¢ÈÕÖ¾£©
+		// çº¯è™šå‡½æ•°ï¼šå¿…é¡»ç”±å­ç±»å®ç°ï¼Œè·å–äº‹ä»¶åç§°ï¼ˆç”¨äºè°ƒè¯•ã€æ—¥å¿—ï¼‰
 		virtual const char* GetName() const = 0;
-		// ´¿Ğéº¯Êı£º±ØĞëÓÉ×ÓÀàÊµÏÖ£¬»ñÈ¡ÊÂ¼ş·ÖÀà±ê¼Ç£¨Î»×éºÏ£©
+		// çº¯è™šå‡½æ•°ï¼šå¿…é¡»ç”±å­ç±»å®ç°ï¼Œè·å–äº‹ä»¶åˆ†ç±»æ ‡è®°ï¼ˆä½ç»„åˆï¼‰
 		virtual int GetCategoryFlags() const = 0;
 
-		// Ğéº¯Êı£º½«ÊÂ¼ş×ªÎª×Ö·û´®£¨Ä¬ÈÏ·µ»ØÊÂ¼şÃû£¬×ÓÀà¿ÉÖØĞ´£©
+		// è™šå‡½æ•°ï¼šå°†äº‹ä»¶è½¬ä¸ºå­—ç¬¦ä¸²ï¼ˆé»˜è®¤è¿”å›äº‹ä»¶åï¼Œå­ç±»å¯é‡å†™ï¼‰
 		virtual std::string ToString() const { return GetName(); }
 
-		// ÄÚÁªº¯Êı£ºÅĞ¶Ïµ±Ç°ÊÂ¼şÊÇ·ñÊôÓÚÄ³¸ö·ÖÀà£¨Î»ÓëÔËËã£©
+		// å†…è”å‡½æ•°ï¼šåˆ¤æ–­å½“å‰äº‹ä»¶æ˜¯å¦å±äºæŸä¸ªåˆ†ç±»ï¼ˆä½ä¸è¿ç®—ï¼‰
 		inline bool IsInCategory(EventCategory category)
 		{
 			return GetCategoryFlags() & category;
 		}
 
 	protected:
-		// ÊÂ¼şÊÇ·ñÒÑ±»´¦Àí£¨±ê¼ÇÎªtrueºó£¬ÊÂ¼ş²»ÔÙ¼ÌĞø´«µİ£©
+		// äº‹ä»¶æ˜¯å¦å·²è¢«å¤„ç†ï¼ˆæ ‡è®°ä¸ºtrueåï¼Œäº‹ä»¶ä¸å†ç»§ç»­ä¼ é€’ï¼‰
 		bool m_Handled = false;
 	};
 
-	// ÊÂ¼ş·Ö·¢Æ÷£º¸ºÔğ½«ÊÂ¼ş·Ö·¢¸ø¶ÔÓ¦ÀàĞÍµÄ´¦Àíº¯Êı
+	// äº‹ä»¶åˆ†å‘å™¨ï¼šè´Ÿè´£å°†äº‹ä»¶åˆ†å‘ç»™å¯¹åº”ç±»å‹çš„å¤„ç†å‡½æ•°
 	class X_API EventDispatcher
 	{
-		// Ä£°å±ğÃû£º¶¨ÒåÊÂ¼ş»Øµ÷º¯ÊıÀàĞÍ£¨²ÎÊıÎª¾ßÌåÊÂ¼şT&£¬·µ»Øbool£©
+		// æ¨¡æ¿åˆ«åï¼šå®šä¹‰äº‹ä»¶å›è°ƒå‡½æ•°ç±»å‹ï¼ˆå‚æ•°ä¸ºå…·ä½“äº‹ä»¶T&ï¼Œè¿”å›boolï¼‰
 		template<typename T>
 		using EventFn = std::function<bool(T&)>;
 
 	public:
-		// ¹¹Ôìº¯Êı£º°ó¶¨Òª·Ö·¢µÄÊÂ¼ş
+		// æ„é€ å‡½æ•°ï¼šç»‘å®šè¦åˆ†å‘çš„äº‹ä»¶
 		EventDispatcher(Event& event)
 			: m_Event(event) {
 		}
 
-		// Ä£°å·Ö·¢º¯Êı£º½«ÊÂ¼ş·Ö·¢¸ø¶ÔÓ¦ÀàĞÍµÄ´¦Àíº¯Êı
+		// æ¨¡æ¿åˆ†å‘å‡½æ•°ï¼šå°†äº‹ä»¶åˆ†å‘ç»™å¯¹åº”ç±»å‹çš„å¤„ç†å‡½æ•°
 		template<typename T>
 		bool Dispatch(EventFn<T> func)
 		{
-			// ±È½ÏÊÂ¼şÀàĞÍÊÇ·ñÆ¥Åä
+			// æ¯”è¾ƒäº‹ä»¶ç±»å‹æ˜¯å¦åŒ¹é…
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
-				// ÀàĞÍ°²È«×ª»»£¬µ÷ÓÃ»Øµ÷º¯Êı£¬²¢ÉèÖÃÊÂ¼ş´¦Àí×´Ì¬
+				// ç±»å‹å®‰å…¨è½¬æ¢ï¼Œè°ƒç”¨å›è°ƒå‡½æ•°ï¼Œå¹¶è®¾ç½®äº‹ä»¶å¤„ç†çŠ¶æ€
 				m_Event.m_Handled = func(*(T*)&m_Event);
-				return true;  // ·Ö·¢³É¹¦
+				return true;  // åˆ†å‘æˆåŠŸ
 			}
-			return false;     // ÀàĞÍ²»Æ¥Åä£¬·Ö·¢Ê§°Ü
+			return false;     // ç±»å‹ä¸åŒ¹é…ï¼Œåˆ†å‘å¤±è´¥
 		}
 
 	private:
-		Event& m_Event;  // ÒıÓÃ£º°ó¶¨Òª·Ö·¢µÄÊÂ¼ş
+		Event& m_Event;  // å¼•ç”¨ï¼šç»‘å®šè¦åˆ†å‘çš„äº‹ä»¶
 	};
 
-	// ÖØÔØ << ÔËËã·û£º·½±ãÊÂ¼şÊä³öµ½Á÷£¨ÈÕÖ¾¡¢´òÓ¡µ÷ÊÔ£©
+	
+	// é‡è½½ << è¿ç®—ç¬¦ï¼šæ–¹ä¾¿äº‹ä»¶è¾“å‡ºåˆ°æµï¼ˆæ—¥å¿—ã€æ‰“å°è°ƒè¯•ï¼‰
 	inline std::ostream& operator<<(std::ostream& os, const Event& e)
 	{
 		return os << e.ToString();
 	}
 }
+// âœ… æ ¸å¿ƒä¿®å¤ï¼šfmt é€‚é… ostream é‡è½½
+template<>
+struct fmt::formatter<XEngine::Event> : fmt::ostream_formatter {};

@@ -14,35 +14,46 @@ workspace "XEngine"
 	-- 例子：Debug-Windows-x64
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	IncludeDir={}
+	IncludeDir["GLFW"] = "XEngine/vendor/GLFW/include"
+
+	include "XEngine/vendor/GLFW"
 -- ======================================================
 -- 项目1：XEngine 引擎核心库（动态库 DLL）
 -- ======================================================
 project "XEngine"
-	location "XEngine"			-- 项目文件放在 XEngine 文件夹
-	kind "SharedLib"			-- 编译类型：动态链接库（.dll）
-	language "C++"				-- 使用 C++ 语言
+location "XEngine"			-- 项目文件放在 XEngine 文件夹
+kind "SharedLib"			-- 编译类型：动态链接库（.dll）
+language "C++"				-- 使用 C++ 语言
 
-	-- 最终生成的 exe/dll 输出目录
-	targetdir ("bin/"..outputdir.."/%{prj.name}")
-	-- 编译中间文件目录（.obj 等）
-	objdir ("bin-int/"..outputdir.."/%{prj.name}")
+-- 最终生成的 exe/dll 输出目录
+targetdir ("bin/"..outputdir.."/%{prj.name}")
+-- 编译中间文件目录（.obj 等）
+objdir ("bin-int/"..outputdir.."/%{prj.name}")
 
-	pchheader "xepch.h"			-- 预编译头文件
-	pchsource "XEngine/src/xepch.cpp"	-- 预编译头文件的源文件
+pchheader "xepch.h"			-- 预编译头文件
+pchsource "XEngine/src/xepch.cpp"	-- 预编译头文件的源文件
 
-	-- 包含的源文件：所有 .h 和 .cpp 文件
-	files
-	{
-		"%{prj.name}/src/**.h",
-		"%{prj.name}/src/**.cpp"
-	}
+-- 包含的源文件：所有 .h 和 .cpp 文件
+files
+{
+	"%{prj.name}/src/**.h",
+	"%{prj.name}/src/**.cpp"
+}
 
-	-- 头文件包含目录（让编译器能找到 spdlog）
-	includedirs
-	{
-		"%{prj.name}/vendor/spdlog/include",
-		"%{prj.name}/src"
-	}
+-- 头文件包含目录（让编译器能找到 spdlog）
+includedirs
+{
+	"%{prj.name}/vendor/spdlog/include",
+	"%{prj.name}/src",
+	"%{IncludeDir.GLFW}"
+}
+
+links
+{
+	"GLFW",	-- 链接 GLFW 库（它会在 GLFW 项目里生成）
+	"opengl32.lib" -- 链接 Windows 的 OpenGL 库
+}
 
 -- ==================== Windows 平台配置 ====================
 filter "system:windows"

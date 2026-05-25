@@ -3,7 +3,10 @@
 
 // 包含事件基类头文件，所有事件都继承自Event
 #include "Event.h"
-
+// 包含引擎核心头文件，定义了X_API导出宏等基础设施
+#include "XEngine/Core.h"
+// 包含Windows.h，可能用于处理Windows特定的事件或功能
+#include "Windows.h"
 
 // X引擎命名空间，避免命名冲突
 namespace XEngine {
