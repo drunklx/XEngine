@@ -2,6 +2,8 @@
 #include "Core.h"
 
 #include "Window.h"
+#include "XEngine/LayerStack.h"
+
 #include "XEngine/Events/ApplicationEvent.h"
 namespace XEngine
 {
@@ -16,11 +18,16 @@ namespace XEngine
 			void Run();
 			
 			void OnEvent(Event& e);
-			bool OnWindowClose(WindowCloseEvent& e);
+			void PushLayer(Layer* layer);
+			void PushOverlay(Layer* layer);
 
 		private:
+			bool OnWindowClose(WindowCloseEvent& e);
+
 			std::unique_ptr<Window> m_Window;
 			bool m_Running = true;
+
+			LayerStack m_LayerStack;
 		};
 		
 

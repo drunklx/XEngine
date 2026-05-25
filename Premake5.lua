@@ -77,14 +77,17 @@ filter "system:windows"
 -- ==================== 不同编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"			-- 定义调试宏
+	buildoptions "/MDd"
 	symbols "On"				-- 生成调试信息
 
 filter "configurations:Release"
 	defines "X_RELEASE"			-- 定义发布宏
+	buildoptions "/MD"
 	optimize "On"				-- 开启优化
 
 filter "configurations:Dist"
 	defines "X_DIST"			-- 定义发行宏
+	buildoptions "/MD"
 	optimize "Full"				-- 全量优化
 
 -- ======================================================
@@ -134,12 +137,15 @@ filter "system:windows"
 -- ==================== 编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"
+	buildoptions "/MDd"
 	symbols "On"
 
 filter "configurations:Release"
 	defines "X_RELEASE"
+	buildoptions "/MD"
 	optimize "On"
 
 filter "configurations:Dist"
 	defines "X_DIST"
+	buildoptions "/MDd"
 	optimize "Full"

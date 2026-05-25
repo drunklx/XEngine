@@ -37,6 +37,7 @@ namespace XEngine {
 		return new WindowsWindow(props);
 	}
 
+
 	// 引擎每帧都会调用的更新函数
 	void WindowsWindow::OnUpdate()
 	{

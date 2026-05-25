@@ -61,7 +61,7 @@ namespace XEngine {
 
 	protected:
 		// 事件是否已被处理（标记为true后，事件不再继续传递）
-		bool m_Handled = false;
+		bool Handled = false;
 	};
 
 	// 事件分发器：负责将事件分发给对应类型的处理函数
@@ -85,7 +85,7 @@ namespace XEngine {
 			if (m_Event.GetEventType() == T::GetStaticType())
 			{
 				// 类型安全转换，调用回调函数，并设置事件处理状态
-				m_Event.m_Handled = func(*(T*)&m_Event);
+				m_Event.Handled = func(*(T*)&m_Event);
 				return true;  // 分发成功
 			}
 			return false;     // 类型不匹配，分发失败
