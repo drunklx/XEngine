@@ -1,7 +1,8 @@
 #pragma once
 #include "XEngine/Window.h"
 
-#include "GLFW/glfw3.h"
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 
 namespace XEngine {
 	class WindowsWindow : public Window
@@ -19,7 +20,7 @@ namespace XEngine {
 		void Init(const WindowProps& props);
 		void Shutdown();
 	private:
-		GLFWwindow* m_Window;
+		GLFWwindow* m_Window;	
 		struct WindowData
 		{
 			std::string Title;

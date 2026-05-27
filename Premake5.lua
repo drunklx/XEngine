@@ -16,8 +16,12 @@ workspace "XEngine"
 
 	IncludeDir={}
 	IncludeDir["GLFW"] = "XEngine/vendor/GLFW/include"
+	IncludeDir["Glad"] = "XEngine/vendor/Glad/include"
+	IncludeDir["Imgui"]= "XEngine/vendor/Imgui"
 
 	include "XEngine/vendor/GLFW"
+	include "XEngine/vendor/Glad"
+	include "XEngine/vendor/Imgui"
 -- ======================================================
 -- 项目1：XEngine 引擎核心库（动态库 DLL）
 -- ======================================================
@@ -46,11 +50,15 @@ includedirs
 {
 	"%{prj.name}/vendor/spdlog/include",
 	"%{prj.name}/src",
-	"%{IncludeDir.GLFW}"
+	"%{IncludeDir.GLFW}",
+	"%{IncludeDir.Glad}",
+	"%{IncludeDir.Imgui}"
 }
 
 links
 {
+	"Imgui",	-- 链接 Imgui 库（它会在 Imgui 项目里生成）""
+	"Glad",	-- 链接 GLAD 库（它会在 GLAD 项目里生成）"
 	"GLFW",	-- 链接 GLFW 库（它会在 GLFW 项目里生成）
 	"opengl32.lib" -- 链接 Windows 的 OpenGL 库
 }
@@ -65,7 +73,8 @@ filter "system:windows"
 	defines
 	{
 		"X_PLATFORM_WINDOWS",	-- 标记当前是 Windows 系统
-		"X_BUILD_DLL"			-- 标记正在编译 DLL（用于导出符号）
+		"X_BUILD_DLL",			-- 标记正在编译 DLL（用于导出符号）
+		"GLFW_INCLUDE_NONE"		-- 告诉 GLFW 不要包含 OpenGL 头文件（我们用 GLAD）"
 	}
 
 	-- 编译后自动执行：把生成的 DLL 复制到 Sandbox 目录

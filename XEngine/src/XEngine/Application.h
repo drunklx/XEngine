@@ -10,6 +10,7 @@ namespace XEngine
 	class X_API Application  
 		{
 	
+		
 		public:
 
 			Application();
@@ -20,6 +21,8 @@ namespace XEngine
 			void OnEvent(Event& e);
 			void PushLayer(Layer* layer);
 			void PushOverlay(Layer* layer);
+			inline Window& getWindow() { return *m_Window; }
+			inline static Application& Get() { return *s_Instance; }
 
 		private:
 			bool OnWindowClose(WindowCloseEvent& e);
@@ -28,6 +31,9 @@ namespace XEngine
 			bool m_Running = true;
 
 			LayerStack m_LayerStack;
+
+		private:
+			static Application* s_Instance;
 		};
 		
 

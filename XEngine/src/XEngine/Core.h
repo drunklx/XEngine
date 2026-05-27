@@ -19,4 +19,6 @@
 #define X_CORE_ASSERT(x, ...)
 #endif // X_ENABLE_ASSERTS
 
+#define X_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
+
 #define BIT(x) (1 << x)

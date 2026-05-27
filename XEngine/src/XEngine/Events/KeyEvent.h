@@ -18,17 +18,19 @@ namespace XEngine {
         // 内联函数：获取按键编码（比如A键=65，回车=13等）
         inline int GetKeyCode() const { return m_KeyCode; }
 
+        inline int GetScanCode() const { return m_ScanCode; }
         // 使用宏：设置事件分类 = 键盘事件 + 输入事件
         EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
     protected:
         // 受保护构造函数：只能被子类调用，禁止直接创 建                  KeyEvent对象
-        KeyEvent(int keycode)
-            : m_KeyCode(keycode) {
+        KeyEvent(int keycode,int scancode=0)
+            : m_KeyCode(keycode),m_ScanCode(scancode) {
         }
 
         // 成员变量：存储当前按键的编码
         int m_KeyCode;
+        int m_ScanCode;
     };
 
     //=====================================================
@@ -38,13 +40,13 @@ namespace XEngine {
     {
     public:
         // 构造函数：参数=按键编码 + 长按重复次数
-        KeyPressedEvent(int keycode, int repeatCount)
-            : KeyEvent(keycode), m_RepeatCount(repeatCount) {
+        KeyPressedEvent(int keycode, int repeatCount,int scanCode=0)
+            : KeyEvent(keycode,scanCode), m_RepeatCount(repeatCount) {
         }
 
         // 获取按键长按重复次数（按住不放会重复触发）
         inline int GetRepeatCount() const { return m_RepeatCount; }
-
+        
         // 重写：将事件转为可读字符串，用于日志输出
         std::string ToString() const override
         {
@@ -68,8 +70,8 @@ namespace XEngine {
     {
     public:
         // 构造函数：参数=按键编码
-        KeyReleasedEvent(int keycode)
-            : KeyEvent(keycode) {
+        KeyReleasedEvent(int keycode,int scancode=0)
+            : KeyEvent(keycode,scancode) {
         }
 
         // 重写：转为日志字符串
@@ -82,5 +84,25 @@ namespace XEngine {
 
         // 使用宏：设置事件类型为 KeyReleased
         EVENT_CLASS_TYPE(KeyReleased)
+    };
+
+    class X_API KeyTypedEvent : public KeyEvent
+    {
+    public:
+        // 构造函数：参数=按键编码
+        KeyTypedEvent(int keycode, int scancode = 0)
+            : KeyEvent(keycode, scancode) {
+        }
+
+        // 重写：转为日志字符串
+        std::string ToString() const override
+        {
+            std::stringstream ss;
+            ss << "KeyTypedEvent: " << m_KeyCode;
+            return ss.str();
+        }
+
+        // 使用宏：设置事件类型为 KeyTyped
+        EVENT_CLASS_TYPE(KeyTyped)
     };
 }

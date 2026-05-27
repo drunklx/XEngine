@@ -4,6 +4,7 @@
 
 #include "XEngine/Application.h"
 #include "XEngine/Layer.h"
+#include "XEngine/Imgui/ImguiLayer.h"
 #include "XEngine/Log.h"
 
 //---Entry Point-------------------------------------

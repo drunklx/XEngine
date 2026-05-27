@@ -8,18 +8,21 @@ public:
 	}
 
 	void OnUpdate() override{
-		X_INFO("ExampleLayer::Update");
+		
 	}
 	void OnEvent(XEngine::Event& event) override {
 		X_TRACE("{0}",event);
 	}
 };
+
 class Sandbox : public XEngine::Application
 {
 public:
 	Sandbox() 
 	{
 		PushLayer(new ExampleLayer());
+		PushOverlay(new XEngine::ImguiLayer());
+		
 	}
 	~Sandbox() {}           
 };

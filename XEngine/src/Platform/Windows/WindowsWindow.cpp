@@ -8,6 +8,7 @@
 #include "XEngine/Events/MouseEvent.h"
 #include "XEngine/Events/KeyEvent.h"
 
+
 namespace XEngine {
 
 	// 静态变量：标记 GLFW 是否全局初始化过（只初始化一次）
@@ -63,6 +64,7 @@ namespace XEngine {
 		return false;
 	}
 
+
 	// ==================== 窗口初始化核心函数 ====================
 	void WindowsWindow::Init(const WindowProps& props)
 	{
@@ -92,13 +94,15 @@ namespace XEngine {
 			m_Data.Title.c_str(),                 // 标题
 			nullptr, nullptr                      // 全屏/共享上下文（不用）
 		);
-
+		
 		// 将此窗口设置为当前 OpenGL 渲染上下文
 		glfwMakeContextCurrent(m_Window);
-
+		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+		X_CORE_ASSERT(status, "Failed to initialize Glad!");
+		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
 		// 关键：把 m_Data 指针绑定到 GLFW 窗口
 		// 作用：事件回调时可以取回窗口数据（非常重要）
-		glfwSetWindowUserPointer(m_Window, &m_Data);
+ 		glfwSetWindowUserPointer(m_Window, &m_Data);
 
 		// 默认开启垂直同步
 		SetVSync(true);
@@ -136,19 +140,19 @@ namespace XEngine {
 				{
 					case GLFW_PRESS:
 					{
-						KeyPressedEvent event(key, 0);
+						KeyPressedEvent event(key, 0, scanmode);
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_RELEASE:
 					{
-						KeyReleasedEvent event(key);
+						KeyReleasedEvent event(key,scanmode);
 						data.EventCallback(event);
 						break;
 					}
 					case GLFW_REPEAT:
 					{
-						KeyPressedEvent event(key, 1);
+						KeyPressedEvent event(key, 1, scanmode);
 						data.EventCallback(event);
 						break;
 					}
@@ -156,7 +160,12 @@ namespace XEngine {
 						break;
 				}
 			});
+		glfwSetCharCallback(m_Window, [](GLFWwindow* window,unsigned int keycode) {
+			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
+			KeyTypedEvent event(keycode);
+			data.EventCallback(event);
 
+			});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window,int button,int action,int modes) 
 			{
 				// 通过窗口指针获取绑定的窗口数据

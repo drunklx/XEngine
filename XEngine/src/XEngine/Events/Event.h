@@ -59,7 +59,6 @@ namespace XEngine {
 			return GetCategoryFlags() & category;
 		}
 
-	protected:
 		// 事件是否已被处理（标记为true后，事件不再继续传递）
 		bool Handled = false;
 	};

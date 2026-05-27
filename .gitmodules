@@ -4,3 +4,6 @@
 [submodule "XEngine/Vendor/GLFW"]
 	path = XEngine/Vendor/GLFW
 	url = https://github.com/drunklx/glfw.git
+[submodule "XEngine/vendor/Imgui"]
+	path = XEngine/vendor/Imgui
+	url = https://github.com/drunklx/imgui.git
