@@ -176,7 +176,7 @@ namespace XEngine
 		// 获取应用程序实例
 		Application& app = Application::Get();
 		// 设置 ImGui 显示尺寸 = 窗口大小
-		io.DisplaySize = ImVec2(app.getWindow().GetWidth(), app.getWindow().GetHeight());
+		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 		// 计算帧间隔时间 deltaTime
 		float time = (float)ImGui::GetTime();
 		io.DeltaTime = m_Time > 0 ? time - m_Time : (1.0f / 60.0f);

@@ -153,6 +153,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Platform\OpenGL\ImguiOpenGLRenderer.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h" />
     <ClInclude Include="src\XEngine.h" />
     <ClInclude Include="src\XEngine\Application.h" />
@@ -163,14 +164,18 @@
     <ClInclude Include="src\XEngine\Events\KeyEvent.h" />
     <ClInclude Include="src\XEngine\Events\MouseEvent.h" />
     <ClInclude Include="src\XEngine\Imgui\ImguiLayer.h" />
+    <ClInclude Include="src\XEngine\Input.h" />
+    <ClInclude Include="src\XEngine\KeyCodes.h" />
     <ClInclude Include="src\XEngine\Layer.h" />
     <ClInclude Include="src\XEngine\LayerStack.h" />
     <ClInclude Include="src\XEngine\Log.h" />
+    <ClInclude Include="src\XEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\XEngine\Window.h" />
     <ClInclude Include="src\xepch.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImguiOpenGLRenderer.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp" />
     <ClCompile Include="src\XEngine\Application.cpp" />
     <ClCompile Include="src\XEngine\Imgui\ImguiLayer.cpp" />

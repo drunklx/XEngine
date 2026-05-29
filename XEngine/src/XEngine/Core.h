@@ -11,6 +11,10 @@
 #endif // X_PLATFORM_WINDOWS
 
 
+#ifdef X_DEBUG
+#define X_ENABLE_ASSERTS
+#endif
+
 #ifdef X_ENABLE_ASSERTS
 	#define X_ASSERT(x, ...) { if(!(x)) { X_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }
 #define X_CORE_ASSERT(x, ...) { if(!(x)) { X_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak(); } }

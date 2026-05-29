@@ -3,6 +3,7 @@
 #include "Application.h"
 #include <glad/glad.h>
 
+#include"Input.h"
 
 namespace XEngine
 {
@@ -27,7 +28,7 @@ namespace XEngine
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
 
-		X_CORE_TRACE("{0}", e);
+		//X_CORE_TRACE("{0}", e);
 
 		for (auto iter = m_LayerStack.end(); iter != m_LayerStack.begin(); )				//图层的事件处理是反向的（从尾到头）
 		{
@@ -66,6 +67,8 @@ namespace XEngine
 			{
 				layer->OnUpdate();
 			}
+			/*auto [x, y] = Input::GetMousePosition();
+			X_CORE_TRACE("{0},{1}", x, y);*/
 			m_Window->OnUpdate();							//更新窗口
 		}
 	}

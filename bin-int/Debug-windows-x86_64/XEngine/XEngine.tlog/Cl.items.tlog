@@ -1,4 +1,5 @@
 G:\Visuals\repos\XEngine\XEngine\src\Platform\OpenGL\ImguiOpenGLRenderer.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\ImguiOpenGLRenderer.obj
+G:\Visuals\repos\XEngine\XEngine\src\Platform\Windows\WindowsInput.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsInput.obj
 G:\Visuals\repos\XEngine\XEngine\src\Platform\Windows\WindowsWindow.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsWindow.obj
 G:\Visuals\repos\XEngine\XEngine\src\XEngine\Application.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Application.obj
 G:\Visuals\repos\XEngine\XEngine\src\XEngine\Imgui\ImguiLayer.cpp;G:\Visuals\repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\ImguiLayer.obj

@@ -2,6 +2,7 @@
 workspace "XEngine"
 	-- 生成64位程序
 	architecture "x64"
+	startproject "Sandbox"
 
 	-- 三种编译配置
 	configurations 	{
@@ -29,6 +30,7 @@ project "XEngine"
 location "XEngine"			-- 项目文件放在 XEngine 文件夹
 kind "SharedLib"			-- 编译类型：动态链接库（.dll）
 language "C++"				-- 使用 C++ 语言
+staticruntime "off"
 
 -- 最终生成的 exe/dll 输出目录
 targetdir ("bin/"..outputdir.."/%{prj.name}")
@@ -86,17 +88,17 @@ filter "system:windows"
 -- ==================== 不同编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"			-- 定义调试宏
-	buildoptions "/MDd"
+	runtime "Debug"
 	symbols "On"				-- 生成调试信息
 
 filter "configurations:Release"
 	defines "X_RELEASE"			-- 定义发布宏
-	buildoptions "/MD"
+	runtime "Release"
 	optimize "On"				-- 开启优化
 
 filter "configurations:Dist"
 	defines "X_DIST"			-- 定义发行宏
-	buildoptions "/MD"
+	runtime "Release"
 	optimize "Full"				-- 全量优化
 
 -- ======================================================
@@ -106,6 +108,7 @@ project "Sandbox"
 	location "Sandbox"			-- 项目文件放在 Sandbox 文件夹
 	kind "ConsoleApp"			-- 编译类型：控制台应用程序（.exe）
 	language "C++"				-- 使用 C++ 语言
+	staticruntime "off"
 
 	-- 输出目录
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
@@ -146,15 +149,15 @@ filter "system:windows"
 -- ==================== 编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"
-	buildoptions "/MDd"
+	runtime "Debug"
 	symbols "On"
 
 filter "configurations:Release"
 	defines "X_RELEASE"
-	buildoptions "/MD"
+	runtime "Release"
 	optimize "On"
 
 filter "configurations:Dist"
 	defines "X_DIST"
-	buildoptions "/MDd"
-	optimize "Full"
+	runtime "Release"
+	optimize "On"

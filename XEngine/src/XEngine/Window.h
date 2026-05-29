@@ -36,6 +36,8 @@ namespace XEngine {
 		virtual void SetVSync(bool enabled) = 0;
 		// 获取当前VSync状态
 		virtual bool IsVSync() const = 0;
+
+		virtual void* GetNativeWindow()const = 0;
 		// 静态工厂方法，根据平台创建窗口实例
 		static Window* Create(const WindowProps& props= WindowProps());
 	};

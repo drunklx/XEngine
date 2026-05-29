@@ -24,9 +24,6 @@
     <ClInclude Include="src\Platform\OpenGL\ImguiOpenGLRenderer.h">
       <Filter>Platform\OpenGL</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\OpenGL\imgui_impl_opengl3_loader.h">
-      <Filter>Platform\OpenGL</Filter>
-    </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
@@ -68,6 +65,8 @@
       <Filter>XEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\xepch.h" />
+    <ClInclude Include="src\XEngine\Input.h" />
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Platform\OpenGL\ImguiOpenGLRenderer.cpp">
@@ -92,5 +91,6 @@
       <Filter>XEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\xepch.cpp" />
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
   </ItemGroup>
 </Project>
