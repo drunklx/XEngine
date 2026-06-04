@@ -1,2 +1,2 @@
-call Vendor\bin\premake5.exe vs2022
+call Vendor\bin\premake5.exe vs2026
 PAUSE

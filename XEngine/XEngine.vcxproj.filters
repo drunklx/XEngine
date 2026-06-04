@@ -21,8 +21,8 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\OpenGL\ImguiOpenGLRenderer.h">
-      <Filter>Platform\OpenGL</Filter>
+    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+      <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
@@ -52,6 +52,12 @@
     <ClInclude Include="src\XEngine\Imgui\ImguiLayer.h">
       <Filter>XEngine\Imgui</Filter>
     </ClInclude>
+    <ClInclude Include="src\XEngine\Input.h">
+      <Filter>XEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XEngine\KeyCodes.h">
+      <Filter>XEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\XEngine\Layer.h">
       <Filter>XEngine</Filter>
     </ClInclude>
@@ -61,16 +67,17 @@
     <ClInclude Include="src\XEngine\Log.h">
       <Filter>XEngine</Filter>
     </ClInclude>
+    <ClInclude Include="src\XEngine\MouseButtonCodes.h">
+      <Filter>XEngine</Filter>
+    </ClInclude>
     <ClInclude Include="src\XEngine\Window.h">
       <Filter>XEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\xepch.h" />
-    <ClInclude Include="src\XEngine\Input.h" />
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\OpenGL\ImguiOpenGLRenderer.cpp">
-      <Filter>Platform\OpenGL</Filter>
+    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+      <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
@@ -91,6 +98,6 @@
       <Filter>XEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\xepch.cpp" />
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp" />
+    <ClCompile Include="src\XEngine\Imgui\ImguiBuilder.cpp" />
   </ItemGroup>
 </Project>
