@@ -9,6 +9,9 @@
 
 #include "XEngine/Input.h"
 #include "XEngine/KeyCodes.h"
+#include "XEngine/Events/ApplicationEvent.h"
+#include "XEngine/Events/KeyEvent.h"
+#include "XEngine/Events/MouseEvent.h"
 #include "XEngine/MouseButtonCodes.h"
 
 //---Entry Point-------------------------------------

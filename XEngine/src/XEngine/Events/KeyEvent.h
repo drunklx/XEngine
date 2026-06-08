@@ -1,53 +1,53 @@
-// Í·ÎÄ¼ş±£»¤£º·ÀÖ¹¸ÃÍ·ÎÄ¼ş±»¶à´Î°üº¬±àÒë
+ï»¿// å¤´æ–‡ä»¶ä¿æŠ¤ï¼šé˜²æ­¢è¯¥å¤´æ–‡ä»¶è¢«å¤šæ¬¡åŒ…å«ç¼–è¯‘
 #pragma once
 
-// °üº¬ÊÂ¼şÏµÍ³»ùÀàÍ·ÎÄ¼ş£¨ËùÓĞÊÂ¼ş¶¼¼Ì³Ğ×ÔÕâÀïµÄEventÀà£©
+// åŒ…å«äº‹ä»¶ç³»ç»ŸåŸºç±»å¤´æ–‡ä»¶ï¼ˆæ‰€æœ‰äº‹ä»¶éƒ½ç»§æ‰¿è‡ªè¿™é‡Œçš„Eventç±»ï¼‰
 #include "Event.h"
 
 
-// XÒıÇæÃüÃû¿Õ¼ä£¬±ÜÃâÈ«¾ÖÃüÃû³åÍ»
+// Xå¼•æ“å‘½åç©ºé—´ï¼Œé¿å…å…¨å±€å‘½åå†²çª
 namespace XEngine {
 
     //=====================================================
-    // ¼üÅÌÊÂ¼ş»ùÀà£¨³éÏóÀà£©
-    // ËùÓĞ¼üÅÌÏà¹ØÊÂ¼ş£¨°´ÏÂ¡¢ÊÍ·Å£©¶¼¼Ì³Ğ×ÔÕâ¸öÀà
+    // é”®ç›˜äº‹ä»¶åŸºç±»ï¼ˆæŠ½è±¡ç±»ï¼‰
+    // æ‰€æœ‰é”®ç›˜ç›¸å…³äº‹ä»¶ï¼ˆæŒ‰ä¸‹ã€é‡Šæ”¾ï¼‰éƒ½ç»§æ‰¿è‡ªè¿™ä¸ªç±»
     //=====================================================
     class X_API KeyEvent : public Event
     {
     public:
-        // ÄÚÁªº¯Êı£º»ñÈ¡°´¼ü±àÂë£¨±ÈÈçA¼ü=65£¬»Ø³µ=13µÈ£©
+        // å†…è”å‡½æ•°ï¼šè·å–æŒ‰é”®ç¼–ç ï¼ˆæ¯”å¦‚Aé”®=65ï¼Œå›è½¦=13ç­‰ï¼‰
         inline int GetKeyCode() const { return m_KeyCode; }
 
         inline int GetScanCode() const { return m_ScanCode; }
-        // Ê¹ÓÃºê£ºÉèÖÃÊÂ¼ş·ÖÀà = ¼üÅÌÊÂ¼ş + ÊäÈëÊÂ¼ş
+        // ä½¿ç”¨å®ï¼šè®¾ç½®äº‹ä»¶åˆ†ç±» = é”®ç›˜äº‹ä»¶ + è¾“å…¥äº‹ä»¶
         EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput)
 
     protected:
-        // ÊÜ±£»¤¹¹Ôìº¯Êı£ºÖ»ÄÜ±»×ÓÀàµ÷ÓÃ£¬½ûÖ¹Ö±½Ó´´ ½¨                  KeyEvent¶ÔÏó
+        // å—ä¿æŠ¤æ„é€ å‡½æ•°ï¼šåªèƒ½è¢«å­ç±»è°ƒç”¨ï¼Œç¦æ­¢ç›´æ¥åˆ› å»º                  KeyEventå¯¹è±¡
         KeyEvent(int keycode,int scancode=0)
             : m_KeyCode(keycode),m_ScanCode(scancode) {
         }
 
-        // ³ÉÔ±±äÁ¿£º´æ´¢µ±Ç°°´¼üµÄ±àÂë
+        // æˆå‘˜å˜é‡ï¼šå­˜å‚¨å½“å‰æŒ‰é”®çš„ç¼–ç 
         int m_KeyCode;
         int m_ScanCode;
     };
 
     //=====================================================
-    // °´¼ü°´ÏÂÊÂ¼ş
+    // æŒ‰é”®æŒ‰ä¸‹äº‹ä»¶
     //=====================================================
     class X_API KeyPressedEvent : public KeyEvent
     {
     public:
-        // ¹¹Ôìº¯Êı£º²ÎÊı=°´¼ü±àÂë + ³¤°´ÖØ¸´´ÎÊı
+        // æ„é€ å‡½æ•°ï¼šå‚æ•°=æŒ‰é”®ç¼–ç  + é•¿æŒ‰é‡å¤æ¬¡æ•°
         KeyPressedEvent(int keycode, int repeatCount,int scanCode=0)
             : KeyEvent(keycode,scanCode), m_RepeatCount(repeatCount) {
         }
 
-        // »ñÈ¡°´¼ü³¤°´ÖØ¸´´ÎÊı£¨°´×¡²»·Å»áÖØ¸´´¥·¢£©
+        // è·å–æŒ‰é”®é•¿æŒ‰é‡å¤æ¬¡æ•°ï¼ˆæŒ‰ä½ä¸æ”¾ä¼šé‡å¤è§¦å‘ï¼‰
         inline int GetRepeatCount() const { return m_RepeatCount; }
         
-        // ÖØĞ´£º½«ÊÂ¼ş×ªÎª¿É¶Á×Ö·û´®£¬ÓÃÓÚÈÕÖ¾Êä³ö
+        // é‡å†™ï¼šå°†äº‹ä»¶è½¬ä¸ºå¯è¯»å­—ç¬¦ä¸²ï¼Œç”¨äºæ—¥å¿—è¾“å‡º
         std::string ToString() const override
         {
             std::stringstream ss;
@@ -55,26 +55,26 @@ namespace XEngine {
             return ss.str();
         }
 
-        // Ê¹ÓÃºê£ºÉèÖÃÊÂ¼şÀàĞÍÎª KeyPressed
+        // ä½¿ç”¨å®ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ä¸º KeyPressed
         EVENT_CLASS_TYPE(KeyPressed)
 
     private:
-        // ÖØ¸´´ÎÊı£º³¤°´°´¼üÊ±»á³ÖĞøÀÛ¼Ó
+        // é‡å¤æ¬¡æ•°ï¼šé•¿æŒ‰æŒ‰é”®æ—¶ä¼šæŒç»­ç´¯åŠ 
         int m_RepeatCount;
     };
 
     //=====================================================
-    // °´¼üÊÍ·ÅÊÂ¼ş
+    // æŒ‰é”®é‡Šæ”¾äº‹ä»¶
     //=====================================================
     class X_API KeyReleasedEvent : public KeyEvent
     {
     public:
-        // ¹¹Ôìº¯Êı£º²ÎÊı=°´¼ü±àÂë
+        // æ„é€ å‡½æ•°ï¼šå‚æ•°=æŒ‰é”®ç¼–ç 
         KeyReleasedEvent(int keycode,int scancode=0)
             : KeyEvent(keycode,scancode) {
         }
 
-        // ÖØĞ´£º×ªÎªÈÕÖ¾×Ö·û´®
+        // é‡å†™ï¼šè½¬ä¸ºæ—¥å¿—å­—ç¬¦ä¸²
         std::string ToString() const override
         {
             std::stringstream ss;
@@ -82,19 +82,19 @@ namespace XEngine {
             return ss.str();
         }
 
-        // Ê¹ÓÃºê£ºÉèÖÃÊÂ¼şÀàĞÍÎª KeyReleased
+        // ä½¿ç”¨å®ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ä¸º KeyReleased
         EVENT_CLASS_TYPE(KeyReleased)
     };
 
     class X_API KeyTypedEvent : public KeyEvent
     {
     public:
-        // ¹¹Ôìº¯Êı£º²ÎÊı=°´¼ü±àÂë
+        // æ„é€ å‡½æ•°ï¼šå‚æ•°=æŒ‰é”®ç¼–ç 
         KeyTypedEvent(int keycode, int scancode = 0)
             : KeyEvent(keycode, scancode) {
         }
 
-        // ÖØĞ´£º×ªÎªÈÕÖ¾×Ö·û´®
+        // é‡å†™ï¼šè½¬ä¸ºæ—¥å¿—å­—ç¬¦ä¸²
         std::string ToString() const override
         {
             std::stringstream ss;
@@ -102,7 +102,7 @@ namespace XEngine {
             return ss.str();
         }
 
-        // Ê¹ÓÃºê£ºÉèÖÃÊÂ¼şÀàĞÍÎª KeyTyped
+        // ä½¿ç”¨å®ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ä¸º KeyTyped
         EVENT_CLASS_TYPE(KeyTyped)
     };
 }

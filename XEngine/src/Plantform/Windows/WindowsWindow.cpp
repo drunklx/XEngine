@@ -1,17 +1,19 @@
-// °üº¬Ô¤±àÒëÍ·£¨¼ÓËÙ±àÒë£©
+ï»¿// åŒ…å«é¢„ç¼–è¯‘å¤´ï¼ˆåŠ é€Ÿç¼–è¯‘ï¼‰
 #include "xepch.h"
 
-// °üº¬´°¿ÚÀàµÄÉùÃ÷Í·ÎÄ¼ş
+// åŒ…å«çª—å£ç±»çš„å£°æ˜å¤´æ–‡ä»¶
 #include "WindowsWindow.h"
 
 #include"XEngine/Events/ApplicationEvent.h"
 #include "XEngine/Events/MouseEvent.h"
 #include "XEngine/Events/KeyEvent.h"
 
+#include "Plantform/OpenGL/OpenGLContext.h"
+
 
 namespace XEngine {
 
-	// ¾²Ì¬±äÁ¿£º±ê¼Ç GLFW ÊÇ·ñÈ«¾Ö³õÊ¼»¯¹ı£¨Ö»³õÊ¼»¯Ò»´Î£©
+	// é™æ€å˜é‡ï¼šæ ‡è®° GLFW æ˜¯å¦å…¨å±€åˆå§‹åŒ–è¿‡ï¼ˆåªåˆå§‹åŒ–ä¸€æ¬¡ï¼‰
 	static bool S_GLFWInitialized = false;
 
 	static void GLFWErrorCallback(int error, const char* description)
@@ -19,121 +21,120 @@ namespace XEngine {
 		X_CORE_ERROR("GLFW Error ({0}): {1}", error, description);
 	}
 
-	// ¹¹Ôìº¯Êı£º´«Èë´°¿ÚÊôĞÔ£¨¿í¡¢¸ß¡¢±êÌâ£©£¬Ö±½Óµ÷ÓÃ³õÊ¼»¯
+
+	// æ„é€ å‡½æ•°ï¼šä¼ å…¥çª—å£å±æ€§ï¼ˆå®½ã€é«˜ã€æ ‡é¢˜ï¼‰ï¼Œç›´æ¥è°ƒç”¨åˆå§‹åŒ–
 	WindowsWindow::WindowsWindow(const WindowProps& props)
 	{
 		Init(props);
 	}
 
-	// Îö¹¹º¯Êı£º´°¿ÚÏú»ÙÊ±×Ô¶¯µ÷ÓÃ£¬¹Ø±Õ´°¿Ú
+	// ææ„å‡½æ•°ï¼šçª—å£é”€æ¯æ—¶è‡ªåŠ¨è°ƒç”¨ï¼Œå…³é—­çª—å£
 	WindowsWindow::~WindowsWindow()
 	{
 		Shutdown();
 	}
 
-	// ¾²Ì¬¹¤³§·½·¨£º´´½¨Ò»¸ö Windows ´°¿ÚÊµÀı
-	// ÉÏ²ãÒıÇæµ÷ÓÃ Window::Create() ¼´¿É´´½¨´°¿Ú£¬²»ÓÃ¹ØĞÄÆ½Ì¨
+	// é™æ€å·¥å‚æ–¹æ³•ï¼šåˆ›å»ºä¸€ä¸ª Windows çª—å£å®ä¾‹
+	// ä¸Šå±‚å¼•æ“è°ƒç”¨ Window::Create() å³å¯åˆ›å»ºçª—å£ï¼Œä¸ç”¨å…³å¿ƒå¹³å°
 	Window* Window::Create(const WindowProps& props)
 	{
 		return new WindowsWindow(props);
 	}
 
 
-	// ÒıÇæÃ¿Ö¡¶¼»áµ÷ÓÃµÄ¸üĞÂº¯Êı
+	// å¼•æ“æ¯å¸§éƒ½ä¼šè°ƒç”¨çš„æ›´æ–°å‡½æ•°
 	void WindowsWindow::OnUpdate()
 	{
-		// 1. ÂÖÑ¯´¦ÀíËùÓĞÊäÈëÊÂ¼ş£¨¼üÅÌ¡¢Êó±ê¡¢´°¿ÚÊÂ¼ş£©
+		// 1. è½®è¯¢å¤„ç†æ‰€æœ‰è¾“å…¥äº‹ä»¶ï¼ˆé”®ç›˜ã€é¼ æ ‡ã€çª—å£äº‹ä»¶ï¼‰
 		glfwPollEvents();
-		// 2. ½»»»Ç°ºó»º³åÇø£¬°ÑäÖÈ¾ºÃµÄ»­ÃæÏÔÊ¾µ½ÆÁÄ»
-		glfwSwapBuffers(m_Window);
+		// 2. äº¤æ¢å‰åç¼“å†²åŒºï¼ŒæŠŠæ¸²æŸ“å¥½çš„ç”»é¢æ˜¾ç¤ºåˆ°å±å¹•
+		m_Context->SwapBuffers();
 	}
 
-	// ¿ªÆô/¹Ø±Õ´¹Ö±Í¬²½£¨VSync£©
+	// å¼€å¯/å…³é—­å‚ç›´åŒæ­¥ï¼ˆVSyncï¼‰
 	void WindowsWindow::SetVSync(bool enabled)
 	{
-		// glfwSwapInterval(1) ¿ªÆô VSync£¬0 ¹Ø±Õ
+		// glfwSwapInterval(1) å¼€å¯ VSyncï¼Œ0 å…³é—­
 		glfwSwapInterval(enabled ? 1 : 0);
 
-		// ±£´æ×´Ì¬µ½´°¿ÚÊı¾İÀï
+		// ä¿å­˜çŠ¶æ€åˆ°çª—å£æ•°æ®é‡Œ
 		m_Data.VSync = enabled;
 	}
 
-	// »ñÈ¡ VSync ×´Ì¬£¨ÕâÀïĞ´ËÀ·µ»Ø false£¬Ó¦¸ÃÊÇ´ıÍêÉÆ£©
+	// è·å– VSync çŠ¶æ€ï¼ˆè¿™é‡Œå†™æ­»è¿”å› falseï¼Œåº”è¯¥æ˜¯å¾…å®Œå–„ï¼‰
 	bool WindowsWindow::IsVSync() const
 	{
 		return false;
 	}
 
 
-	// ==================== ´°¿Ú³õÊ¼»¯ºËĞÄº¯Êı ====================
+	// ==================== çª—å£åˆå§‹åŒ–æ ¸å¿ƒå‡½æ•° ====================
 	void WindowsWindow::Init(const WindowProps& props)
 	{
-		// °Ñ´°¿Ú±êÌâ¡¢¿í¡¢¸ß±£´æµ½ m_Data ½á¹¹ÌåÖĞ
+		// æŠŠçª—å£æ ‡é¢˜ã€å®½ã€é«˜ä¿å­˜åˆ° m_Data ç»“æ„ä½“ä¸­
 		m_Data.Title = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
-		// ´òÓ¡ÈÕÖ¾£º´´½¨´°¿Ú
+		// æ‰“å°æ—¥å¿—ï¼šåˆ›å»ºçª—å£
 		X_CORE_INFO("Creating window {0} ({1}, {2})", props.Title, props.Width, props.Height);
 
-		// Èç¹û GLFW »¹Ã»³õÊ¼»¯£¬¾ÍÈ«¾Ö³õÊ¼»¯Ò»´Î
+		// å¦‚æœ GLFW è¿˜æ²¡åˆå§‹åŒ–ï¼Œå°±å…¨å±€åˆå§‹åŒ–ä¸€æ¬¡
 		if (!S_GLFWInitialized)
 		{
-			// ³õÊ¼»¯ GLFW ¿â
+			// åˆå§‹åŒ– GLFW åº“
 			int success = glfwInit();
-			// Èç¹û³õÊ¼»¯Ê§°Ü£¬Ö±½Ó¶ÏÑÔ±ÀÀ£²¢ÌáÊ¾´íÎó
+			// å¦‚æœåˆå§‹åŒ–å¤±è´¥ï¼Œç›´æ¥æ–­è¨€å´©æºƒå¹¶æç¤ºé”™è¯¯
 			X_CORE_ASSERT(success, "Could not initialize GLFW!");
 			glfwSetErrorCallback(GLFWErrorCallback);
-			// ±ê¼ÇÒÑ³õÊ¼»¯
+			// æ ‡è®°å·²åˆå§‹åŒ–
 			S_GLFWInitialized = true;
 		}
 
-		// µ÷ÓÃ GLFW ´´½¨´°¿Ú£¬·µ»Ø´°¿Ú¾ä±ú
+		// è°ƒç”¨ GLFW åˆ›å»ºçª—å£ï¼Œè¿”å›çª—å£å¥æŸ„
 		m_Window = glfwCreateWindow(
-			(int)props.Width, (int)props.Height,  // ¿í¸ß
-			m_Data.Title.c_str(),                 // ±êÌâ
-			nullptr, nullptr                      // È«ÆÁ/¹²ÏíÉÏÏÂÎÄ£¨²»ÓÃ£©
+			(int)props.Width, (int)props.Height,  // å®½é«˜
+			m_Data.Title.c_str(),                 // æ ‡é¢˜
+			nullptr, nullptr                      // å…¨å±/å…±äº«ä¸Šä¸‹æ–‡ï¼ˆä¸ç”¨ï¼‰
 		);
 		
-		// ½«´Ë´°¿ÚÉèÖÃÎªµ±Ç° OpenGL äÖÈ¾ÉÏÏÂÎÄ
-		glfwMakeContextCurrent(m_Window);
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		X_CORE_ASSERT(status, "Failed to initialize Glad!");
-		std::cout << "OpenGL Version: " << glGetString(GL_VERSION) << std::endl;
-		// ¹Ø¼ü£º°Ñ m_Data Ö¸Õë°ó¶¨µ½ GLFW ´°¿Ú
-		// ×÷ÓÃ£ºÊÂ¼ş»Øµ÷Ê±¿ÉÒÔÈ¡»Ø´°¿ÚÊı¾İ£¨·Ç³£ÖØÒª£©
+		// å°†æ­¤çª—å£è®¾ç½®ä¸ºå½“å‰ OpenGL æ¸²æŸ“ä¸Šä¸‹æ–‡
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+		// å…³é”®ï¼šæŠŠ m_Data æŒ‡é’ˆç»‘å®šåˆ° GLFW çª—å£
+		// ä½œç”¨ï¼šäº‹ä»¶å›è°ƒæ—¶å¯ä»¥å–å›çª—å£æ•°æ®ï¼ˆéå¸¸é‡è¦ï¼‰
  		glfwSetWindowUserPointer(m_Window, &m_Data);
 
-		// Ä¬ÈÏ¿ªÆô´¹Ö±Í¬²½
+		// é»˜è®¤å¼€å¯å‚ç›´åŒæ­¥
 		SetVSync(true);
 
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height)
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				// ¸üĞÂ´°¿ÚÊı¾İÖĞµÄ¿í¸ß
+				// æ›´æ–°çª—å£æ•°æ®ä¸­çš„å®½é«˜
 				data.Width = width;
 				data.Height = height;
-				// ´´½¨Ò»¸ö´°¿Ú´óĞ¡¸Ä±äÊÂ¼ş£¬´«ÈëĞÂµÄ¿í¸ß
+				// åˆ›å»ºä¸€ä¸ªçª—å£å¤§å°æ”¹å˜äº‹ä»¶ï¼Œä¼ å…¥æ–°çš„å®½é«˜
 				WindowResizeEvent event(width, height);
-				// µ÷ÓÃÊÂ¼ş»Øµ÷º¯Êı£¬´«ÈëÊÂ¼ş¶ÔÏó
+				// è°ƒç”¨äº‹ä»¶å›è°ƒå‡½æ•°ï¼Œä¼ å…¥äº‹ä»¶å¯¹è±¡
 				data.EventCallback(event);
 				
 			});
 			
 		glfwSetWindowCloseCallback(m_Window, [](GLFWwindow* window)
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
-				// ´´½¨Ò»¸ö´°¿Ú¹Ø±ÕÊÂ¼ş
+				// åˆ›å»ºä¸€ä¸ªçª—å£å…³é—­äº‹ä»¶
 				WindowCloseEvent event;
-				// µ÷ÓÃÊÂ¼ş»Øµ÷º¯Êı£¬´«ÈëÊÂ¼ş¶ÔÏó
+				// è°ƒç”¨äº‹ä»¶å›è°ƒå‡½æ•°ï¼Œä¼ å…¥äº‹ä»¶å¯¹è±¡
 				data.EventCallback(event);
 			});
 
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scanmode, int action, int mods) 
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 				switch (action)
@@ -168,7 +169,7 @@ namespace XEngine {
 			});
 		glfwSetMouseButtonCallback(m_Window, [](GLFWwindow* window,int button,int action,int modes) 
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
 				switch (action)
@@ -192,7 +193,7 @@ namespace XEngine {
 
 		glfwSetScrollCallback(m_Window, [](GLFWwindow* window, double xOffset, double yOffset)
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseScrolledEvent event((float)xOffset, (float)yOffset);
 				data.EventCallback(event);
@@ -200,14 +201,14 @@ namespace XEngine {
 
 		glfwSetCursorPosCallback(m_Window, [](GLFWwindow* window, double xPos, double yPos)
 			{
-				// Í¨¹ı´°¿ÚÖ¸Õë»ñÈ¡°ó¶¨µÄ´°¿ÚÊı¾İ
+				// é€šè¿‡çª—å£æŒ‡é’ˆè·å–ç»‘å®šçš„çª—å£æ•°æ®
 				WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 				MouseMovedEvent event((float)xPos, (float)yPos);
 				data.EventCallback(event);
 			});
 	}
 
-	// ¹Ø±ÕÏú»Ù´°¿Ú
+	// å…³é—­é”€æ¯çª—å£
 	void WindowsWindow::Shutdown()
 	{
 		glfwDestroyWindow(m_Window);

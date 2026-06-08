@@ -1,9 +1,14 @@
-D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Platform\OpenGL\ImguiOpenGLRenderer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\ImguiOpenGLRenderer.obj
-D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Platform\Windows\WindowsInput.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsInput.obj
-D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Platform\Windows\WindowsWindow.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsWindow.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Plantform\OpenGL\OpenGLBuffer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\OpenGLBuffer.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Renderer\Buffer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Buffer.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Renderer\Renderer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Renderer.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Plantform\OpenGL\OpenGLContext.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\OpenGLContext.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Plantform\Windows\WindowsInput.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsInput.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\Plantform\Windows\WindowsWindow.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\WindowsWindow.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Application.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Application.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Imgui\ImguiBuilder.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\ImguiBuilder.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Imgui\ImguiLayer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\ImguiLayer.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Layer.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Layer.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\LayerStack.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\LayerStack.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Log.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Log.obj
+D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\XEngine\Renderer\Shader.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\Shader.obj
 D:\Env\Microsoft\Visuals\Repos\XEngine\XEngine\src\xepch.cpp;D:\Env\Microsoft\Visuals\Repos\XEngine\bin-int\Debug-windows-x86_64\XEngine\xepch.obj

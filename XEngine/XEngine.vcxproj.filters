@@ -4,9 +4,6 @@
     <Filter Include="Platform">
       <UniqueIdentifier>{2AC788B4-1694-E3BF-3FAD-D1672BD9184E}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Platform\OpenGL">
-      <UniqueIdentifier>{1E7D2C1D-8A08-9AE1-9319-1DD6FF23F6E1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Platform\Windows">
       <UniqueIdentifier>{64FBD71A-50F4-F66C-7926-DCF1657ED678}</UniqueIdentifier>
     </Filter>
@@ -21,10 +18,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Platform\Windows\WindowsInput.h">
+    <ClInclude Include="src\Plantform\Windows\WindowsInput.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
-    <ClInclude Include="src\Platform\Windows\WindowsWindow.h">
+    <ClInclude Include="src\Plantform\Windows\WindowsWindow.h">
       <Filter>Platform\Windows</Filter>
     </ClInclude>
     <ClInclude Include="src\XEngine.h" />
@@ -74,16 +71,25 @@
       <Filter>XEngine</Filter>
     </ClInclude>
     <ClInclude Include="src\xepch.h" />
+    <ClInclude Include="src\XEngine\Renderer\GraphicsContext.h" />
+    <ClInclude Include="src\Plantform\OpenGL\OpenglContext.h" />
+    <ClInclude Include="src\XEngine\Renderer\Shader.h" />
+    <ClInclude Include="src\XEngine\Renderer\Renderer.h" />
+    <ClInclude Include="src\XEngine\Renderer\Buffer.h" />
+    <ClInclude Include="src\Plantform\OpenGL\OpenGLBuffer.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Platform\Windows\WindowsInput.cpp">
+    <ClCompile Include="src\Plantform\Windows\WindowsInput.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
-    <ClCompile Include="src\Platform\Windows\WindowsWindow.cpp">
+    <ClCompile Include="src\Plantform\Windows\WindowsWindow.cpp">
       <Filter>Platform\Windows</Filter>
     </ClCompile>
     <ClCompile Include="src\XEngine\Application.cpp">
       <Filter>XEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XEngine\Imgui\ImguiBuilder.cpp">
+      <Filter>XEngine\Imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\XEngine\Imgui\ImguiLayer.cpp">
       <Filter>XEngine\Imgui</Filter>
@@ -98,6 +104,10 @@
       <Filter>XEngine</Filter>
     </ClCompile>
     <ClCompile Include="src\xepch.cpp" />
-    <ClCompile Include="src\XEngine\Imgui\ImguiBuilder.cpp" />
+    <ClCompile Include="src\Plantform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\Shader.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\Buffer.cpp" />
+    <ClCompile Include="src\Plantform\OpenGL\OpenGLBuffer.cpp" />
   </ItemGroup>
 </Project>

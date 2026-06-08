@@ -24,13 +24,16 @@ workspace "XEngine"
 	include "XEngine/vendor/Glad"
 	include "XEngine/vendor/Imgui"
 -- ======================================================
--- 项目1：XEngine 引擎核心库（动态库 DLL）
+-- 项目1：XEngine 引擎核心库（静态库 staticlib）
 -- ======================================================
 project "XEngine"
 location "XEngine"			-- 项目文件放在 XEngine 文件夹
-kind "SharedLib"			-- 编译类型：动态链接库（.dll）
+kind "StaticLib"			-- 编译类型：静态链接库（.lib ）
 language "C++"				-- 使用 C++ 语言
-staticruntime "off"
+staticruntime "on"
+cppdialect "C++17"			-- 使用 C++17 标准
+systemversion "latest"		-- 使用最新 Windows SDK
+buildoptions { "/utf-8" }        -- 使用 UTF-8 字符集
 
 -- 最终生成的 exe/dll 输出目录
 targetdir ("bin/"..outputdir.."/%{prj.name}")
@@ -67,10 +70,6 @@ links
 
 -- ==================== Windows 平台配置 ====================
 filter "system:windows"
-	cppdialect "C++17"			-- 使用 C++17 标准
-	systemversion "latest"		-- 使用最新 Windows SDK
-	buildoptions { "/utf-8" }        -- 使用 UTF-8 字符集
-
 	-- 预处理器宏定义
 	defines
 	{
@@ -79,27 +78,22 @@ filter "system:windows"
 		"GLFW_INCLUDE_NONE"		-- 告诉 GLFW 不要包含 OpenGL 头文件（我们用 GLAD）"
 	}
 
-	-- 编译后自动执行：把生成的 DLL 复制到 Sandbox 目录
-	postbuildcommands
-	{
-		("{COPY} %{cfg.buildtarget.relpath} ../bin/"..outputdir.."/Sandbox")
-	}
 
 -- ==================== 不同编译模式配置 ====================
 filter "configurations:Debug"
 	defines "X_DEBUG"			-- 定义调试宏
 	runtime "Debug"
-	symbols "On"				-- 生成调试信息
+	symbols "on"				-- 生成调试信息
 
 filter "configurations:Release"
 	defines "X_RELEASE"			-- 定义发布宏
 	runtime "Release"
-	optimize "On"				-- 开启优化
+	optimize "on"				-- 开启优化
 
 filter "configurations:Dist"
 	defines "X_DIST"			-- 定义发行宏
 	runtime "Release"
-	optimize "Full"				-- 全量优化
+	optimize "on"				-- 全量优化
 
 -- ======================================================
 -- 项目2：Sandbox 测试程序（控制台应用）
@@ -108,7 +102,11 @@ project "Sandbox"
 	location "Sandbox"			-- 项目文件放在 Sandbox 文件夹
 	kind "ConsoleApp"			-- 编译类型：控制台应用程序（.exe）
 	language "C++"				-- 使用 C++ 语言
-	staticruntime "off"
+	staticruntime "on"
+	cppdialect "C++17"
+	systemversion "latest"
+	buildoptions { "/utf-8" }
+
 
 	-- 输出目录
 	targetdir ("bin/"..outputdir.."/%{prj.name}")
@@ -137,9 +135,7 @@ project "Sandbox"
 
 -- ==================== Windows 平台配置 ====================
 filter "system:windows"
-	cppdialect "C++17"
-	systemversion "latest"
-	buildoptions { "/utf-8" }
+	
 
 	defines
 	{
@@ -150,14 +146,14 @@ filter "system:windows"
 filter "configurations:Debug"
 	defines "X_DEBUG"
 	runtime "Debug"
-	symbols "On"
+	symbols "on"
 
 filter "configurations:Release"
 	defines "X_RELEASE"
 	runtime "Release"
-	optimize "On"
+	optimize "on"
 
 filter "configurations:Dist"
 	defines "X_DIST"
 	runtime "Release"
-	optimize "On"
+	optimize "on"

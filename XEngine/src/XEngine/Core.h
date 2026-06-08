@@ -1,11 +1,15 @@
 #pragma once
 
 #ifdef X_PLATFORM_WINDOWS
-	#ifdef X_BUILD_DLL
+#ifdef X_DYNAMIC_LINK
+#ifdef X_BUILD_DLL
 #define X_API __declspec(dllexport)
-	#else
+#else
 #define X_API __declspec(dllimport)
 	#endif // X_BUILD_DLL
+#else
+#define X_API
+#endif // X_DYNAMIC_LINK
 #else 
 	#error XEngine only supports Windows!
 #endif // X_PLATFORM_WINDOWS

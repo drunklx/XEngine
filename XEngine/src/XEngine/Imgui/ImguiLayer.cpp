@@ -1,72 +1,97 @@
-#include "xepch.h"
+ï»¿#include "xepch.h"
 #include "ImguiLayer.h"
 #include "imgui.h"
-// Ó¦ÓÃ³ÌĞòÀà£¬»ñÈ¡´°¿ÚĞÅÏ¢
+
 #include "XEngine/Application.h"
-// GLFW ´°¿Ú¿â
+#include "backends/imgui_impl_opengl3.h"
+#include "backends/imgui_impl_glfw.h"
+// GLFW çª—å£åº“
 #include "GLFW/glfw3.h"
-// OpenGL º¯Êı¼ÓÔØ
+// OpenGL å‡½æ•°åŠ è½½
 #include <glad/glad.h>
+
+
 
 namespace XEngine
 {
-	// ¹¹Ôìº¯Êı£ºµ÷ÓÃ¸¸ÀàLayer£¬ÉèÖÃ²ãÃû³Æ
+	// æ„é€ å‡½æ•°ï¼šè°ƒç”¨çˆ¶ç±»Layerï¼Œè®¾ç½®å±‚åç§°
 	ImguiLayer::ImguiLayer()
 		: Layer("ImguiLayer")
 	{
 	}
 
-	// ²ã±»¸½¼ÓÊ±µ÷ÓÃ£º³õÊ¼»¯ ImGui ÉÏÏÂÎÄ + OpenGL ºó¶Ë
+	// å±‚è¢«é™„åŠ æ—¶è°ƒç”¨ï¼šåˆå§‹åŒ– ImGui ä¸Šä¸‹æ–‡ + OpenGL åç«¯
 	void XEngine::ImguiLayer::OnAttach()
 	{
-		// ´´½¨ ImGui Ö÷ÉÏÏÂÎÄ£¨±ØĞëµÚÒ»²½£©
+		// Setup Dear ImGui context
+		IMGUI_CHECKVERSION();
 		ImGui::CreateContext();
+		ImGuiIO& io = ImGui::GetIO(); (void)io;
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+		//io.ConfigViewportsNoAutoMerge = true;
+		//io.ConfigViewportsNoTaskBarIcon = true;
 
-		// »ñÈ¡ ImGui IO ÅäÖÃ
-		ImGuiIO& io = ImGui::GetIO();
-		// ÆôÓÃÊó±êÑùÊ½Ö§³Ö
-		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
-		// ÆôÓÃÉèÖÃÊó±êÎ»ÖÃ¹¦ÄÜ
-		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+		// Setup Dear ImGui style
+		ImGui::StyleColorsDark();
+		//ImGui::StyleColorsLight();
 
-		// ³õÊ¼»¯ OpenGL3 äÖÈ¾Æ÷£¬Ê¹ÓÃ GLSL #version 410
+		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
+		Application& app = Application::Get();			//ï¼ï¼ï¼Getæ˜¯é™æ€å‡½æ•°ï¼ŒGetWindowæ˜¯æˆå‘˜å‡½æ•°ï¼Œä½¿ç”¨æ–¹æ³•ä¸åŒ
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+
+		// Setup Plantform/Renderer bindings
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 410");
 	}
 
-	// ²ã±»·ÖÀëÊ±µ÷ÓÃ£ºÊÍ·Å ImGui ×ÊÔ´£¨Ä¿Ç°¿ÕÊµÏÖ£©
 	void XEngine::ImguiLayer::OnDetach()
 	{
+		//clean up
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
 	}
 
-	// Ã¿Ö¡¸üĞÂ£ºäÖÈ¾ ImGui ½çÃæ
-	void XEngine::ImguiLayer::OnUpdate()
+	void ImguiLayer::Begin()
+	{
+		// Start the Dear ImGui frame
+		ImGui_ImplOpenGL3_NewFrame();						//æ¯ä¸€å¸§å¼€å§‹æ—¶å‡†å¤‡ OpenGL æ¸²æŸ“ç¯å¢ƒä»¥ä¾› Dear ImGui ç»˜åˆ¶ UI å…ƒç´ 
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();									//æ¸…é™¤ä¹‹å‰çš„ UI æ•°æ®ï¼Œå‡†å¤‡æ¥å—æ–°çš„ UI ç»˜åˆ¶æŒ‡ä»¤ï¼ˆå‡†å¤‡æ–°å¸§ï¼‰ï¼Œå¹¶æ›´æ–°è¾“å…¥çŠ¶æ€
+	}
+
+	void ImguiLayer::OnImGuiRender()						//æ­¤å‡½æ•°å°†ä¼šè¢«è®¾ç½®åœ¨ Begin å’Œ End ä¹‹é—´ï¼Œå¹¶ä¸”å¯ä»¥ç”±ä»»ä½•å±‚ç¼–å†™
+	{
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
+	}
+
+	void ImguiLayer::End()
 	{
 		ImGuiIO& io = ImGui::GetIO();
-		// »ñÈ¡Ó¦ÓÃ³ÌĞòÊµÀı
 		Application& app = Application::Get();
-		// ÉèÖÃ ImGui ÏÔÊ¾³ß´ç = ´°¿Ú´óĞ¡
 		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
-		// ¼ÆËãÖ¡¼ä¸ôÊ±¼ä deltaTime
-		float time = (float)ImGui::GetTime();
-		io.DeltaTime = m_Time > 0 ? time - m_Time : (1.0f / 60.0f);
-		m_Time = time;
 
-		// ¿ªÊ¼ĞÂÒ»Ö¡ ImGui
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
+		// Rendering
+		ImGui::Render();										//ç»“æŸå½“å‰å¸§çš„ UI ç»˜åˆ¶è¿‡ç¨‹ï¼Œå¹¶å‡†å¤‡å°†ç»˜åˆ¶çš„æ•°æ®ä¿å­˜åˆ°æš‚å­˜åŒº
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());	//å°†ç¼“å†²åŒºä¸­çš„ç»˜åˆ¶æ•°æ®æäº¤ç»™æ¸²æŸ“å™¨è¿›è¡Œæ“ä½œ 
 
-		// ÏÔÊ¾ ImGui ¹Ù·½ÑİÊ¾´°¿Ú£¨µ÷ÊÔÓÃ£©
-		static bool show = false;
-		ImGui::ShowDemoWindow(&show);
-
-		// äÖÈ¾ ImGui »æÖÆÊı¾İ
-		ImGui::Render();
-		// Ê¹ÓÃ OpenGL äÖÈ¾ ImGui
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
-
-
-
-
-
 }

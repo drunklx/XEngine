@@ -1,7 +1,7 @@
 [submodule "XEngine/vendor/spdLog"]
 	path = XEngine/vendor/spdLog
 	url = https://gitcode.com/GitHub_Trending/sp/spdlog.git
-	[submodule "XEngine/Vendor/GLFW"]
+[submodule "XEngine/Vendor/GLFW"]
 	path = XEngine/Vendor/GLFW
 	url = https://github.com/drunklx/glfw.git
 [submodule "XEngine/vendor/Imgui"]

@@ -1,4 +1,4 @@
-#include <xepch.h>
+ï»¿#include <xepch.h>
 
 #include "Core.h"
 #include "Events/Event.h"
@@ -7,38 +7,38 @@ namespace XEngine {
 
 	struct WindowProps
 	{
-		std::string Title; // ´°¿Ú±êÌâ
-		unsigned int Width; // ´°¿Ú¿í¶È
-		unsigned int Height; // ´°¿Ú¸ß¶È
-		// ¹¹Ôìº¯Êı£¬Ìá¹©Ä¬ÈÏÖµ
+		std::string Title; // çª—å£æ ‡é¢˜
+		unsigned int Width; // çª—å£å®½åº¦
+		unsigned int Height; // çª—å£é«˜åº¦
+		// æ„é€ å‡½æ•°ï¼Œæä¾›é»˜è®¤å€¼
 		WindowProps(const std::string& title = "XEngine Window",
 			unsigned int width = 1280,
 			unsigned int height = 720)
 			: Title(title), Width(width), Height(height) {}
 	};
-	// ´°¿ÚÀà£¬·â×°ÁË´°¿ÚµÄ´´½¨¡¢¸üĞÂºÍÊÂ¼ş´¦Àí
+	// çª—å£ç±»ï¼Œå°è£…äº†çª—å£çš„åˆ›å»ºã€æ›´æ–°å’Œäº‹ä»¶å¤„ç†
 	class X_API Window
 	{
 	public:
-		// ¶¨ÒåÒ»¸öº¯ÊıÖ¸ÕëÀàĞÍ£¬ÓÃÓÚÊÂ¼ş»Øµ÷
+		// å®šä¹‰ä¸€ä¸ªå‡½æ•°æŒ‡é’ˆç±»å‹ï¼Œç”¨äºäº‹ä»¶å›è°ƒ
 		using EventCallbackFn= std::function<void(Event&)>;
-		// Îö¹¹º¯Êı£¬ÊÍ·Å´°¿Ú×ÊÔ´
+		// ææ„å‡½æ•°ï¼Œé‡Šæ”¾çª—å£èµ„æº
 		virtual ~Window() {}
-		// ¸üĞÂ´°¿Ú×´Ì¬£¨Èç½»»»»º³åÇø¡¢´¦ÀíÊÂ¼şµÈ£©
+		// æ›´æ–°çª—å£çŠ¶æ€ï¼ˆå¦‚äº¤æ¢ç¼“å†²åŒºã€å¤„ç†äº‹ä»¶ç­‰ï¼‰
 		virtual void OnUpdate() = 0;
-		// »ñÈ¡´°¿Ú¿í¶È
+		// è·å–çª—å£å®½åº¦
 		virtual unsigned int GetWidth() const = 0;
-		// »ñÈ¡´°¿Ú¸ß¶È
+		// è·å–çª—å£é«˜åº¦
 		virtual unsigned int GetHeight() const = 0;
-		// ÉèÖÃÊÂ¼ş»Øµ÷º¯Êı£¬µ±´°¿ÚÊÂ¼ş·¢ÉúÊ±µ÷ÓÃ
+		// è®¾ç½®äº‹ä»¶å›è°ƒå‡½æ•°ï¼Œå½“çª—å£äº‹ä»¶å‘ç”Ÿæ—¶è°ƒç”¨
 		virtual void SetEventCallback(const EventCallbackFn& callback) = 0;
-		// ÉèÖÃ´¹Ö±Í¬²½£¨VSync£©¿ª¹Ø£¬¿ªÆôºóÖ¡ÂÊÓëÏÔÊ¾Æ÷Ë¢ĞÂÂÊÍ¬²½
+		// è®¾ç½®å‚ç›´åŒæ­¥ï¼ˆVSyncï¼‰å¼€å…³ï¼Œå¼€å¯åå¸§ç‡ä¸æ˜¾ç¤ºå™¨åˆ·æ–°ç‡åŒæ­¥
 		virtual void SetVSync(bool enabled) = 0;
-		// »ñÈ¡µ±Ç°VSync×´Ì¬
+		// è·å–å½“å‰VSyncçŠ¶æ€
 		virtual bool IsVSync() const = 0;
 
 		virtual void* GetNativeWindow()const = 0;
-		// ¾²Ì¬¹¤³§·½·¨£¬¸ù¾İÆ½Ì¨´´½¨´°¿ÚÊµÀı
+		// é™æ€å·¥å‚æ–¹æ³•ï¼Œæ ¹æ®å¹³å°åˆ›å»ºçª—å£å®ä¾‹
 		static Window* Create(const WindowProps& props= WindowProps());
 	};
 }

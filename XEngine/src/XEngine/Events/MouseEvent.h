@@ -1,35 +1,35 @@
-// ·ÀÖ¹Í·ÎÄ¼ş±»ÖØ¸´°üº¬
+ï»¿// é˜²æ­¢å¤´æ–‡ä»¶è¢«é‡å¤åŒ…å«
 #pragma once
 
-// °üº¬ÊÂ¼ş»ùÀàÍ·ÎÄ¼ş£¨ËùÓĞÊÂ¼ş¶¼¼Ì³Ğ×ÔEvent£©
+// åŒ…å«äº‹ä»¶åŸºç±»å¤´æ–‡ä»¶ï¼ˆæ‰€æœ‰äº‹ä»¶éƒ½ç»§æ‰¿è‡ªEventï¼‰
 #include "Event.h"
 
 
-// ÒıÇæÃüÃû¿Õ¼ä
+// å¼•æ“å‘½åç©ºé—´
 namespace XEngine {
 
     // ==============================================
-    // Êó±êÒÆ¶¯ÊÂ¼ş
+    // é¼ æ ‡ç§»åŠ¨äº‹ä»¶
     // ==============================================
     class X_API MouseMovedEvent : public Event
     {
     public:
-        // ¹¹Ôìº¯Êı£º´«ÈëÊó±êµ±Ç° X¡¢Y ×ø±ê
+        // æ„é€ å‡½æ•°ï¼šä¼ å…¥é¼ æ ‡å½“å‰ Xã€Y åæ ‡
         MouseMovedEvent(float x, float y)
             : m_MouseX(x), m_MouseY(y) {
         }
 
-        // »ñÈ¡Êó±ê X ×ø±ê
+        // è·å–é¼ æ ‡ X åæ ‡
         inline float GetX() const { return m_MouseX; }
-        // »ñÈ¡Êó±ê Y ×ø±ê
+        // è·å–é¼ æ ‡ Y åæ ‡
         inline float GetY() const { return m_MouseY; }
 
-        // ºê£ºÉèÖÃÊÂ¼şÀàĞÍ = MouseMoved
+        // å®ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ = MouseMoved
         EVENT_CLASS_TYPE(MouseMoved)
-            // ºê£ºÉèÖÃÊÂ¼ş·ÖÀà = Êó±êÊÂ¼ş + ÊäÈëÊÂ¼ş
+            // å®ï¼šè®¾ç½®äº‹ä»¶åˆ†ç±» = é¼ æ ‡äº‹ä»¶ + è¾“å…¥äº‹ä»¶
             EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-            // ÖØĞ´£º½«ÊÂ¼ş×ªÎª×Ö·û´®£¬ÓÃÓÚÈÕÖ¾Êä³ö
+            // é‡å†™ï¼šå°†äº‹ä»¶è½¬ä¸ºå­—ç¬¦ä¸²ï¼Œç”¨äºæ—¥å¿—è¾“å‡º
             std::string ToString() const override
         {
             std::stringstream ss;
@@ -38,30 +38,30 @@ namespace XEngine {
         }
 
     private:
-        // ´æ´¢Êó±ê×ø±ê
+        // å­˜å‚¨é¼ æ ‡åæ ‡
         float m_MouseX, m_MouseY;
     };
 
     // ==============================================
-    // Êó±ê¹öÂÖ¹ö¶¯ÊÂ¼ş
+    // é¼ æ ‡æ»šè½®æ»šåŠ¨äº‹ä»¶
     // ==============================================
     class X_API MouseScrolledEvent : public Event
     {
     public:
-        // ¹¹Ôìº¯Êı£º´«Èë¹öÂÖË®Æ½/´¹Ö±Æ«ÒÆÁ¿
+        // æ„é€ å‡½æ•°ï¼šä¼ å…¥æ»šè½®æ°´å¹³/å‚ç›´åç§»é‡
         MouseScrolledEvent(float xOffset, float yOffset)
             : m_XOffset(xOffset), m_YOffset(yOffset) {
         }
 
-        // »ñÈ¡Ë®Æ½¹öÂÖÆ«ÒÆ£¨ºÜÉÙÓÃ£©
+        // è·å–æ°´å¹³æ»šè½®åç§»ï¼ˆå¾ˆå°‘ç”¨ï¼‰
         inline float GetXOffset() const { return m_XOffset; }
-        // »ñÈ¡´¹Ö±¹öÂÖÆ«ÒÆ£¨ÉÏÏÂ¹ö¶¯£©
+        // è·å–å‚ç›´æ»šè½®åç§»ï¼ˆä¸Šä¸‹æ»šåŠ¨ï¼‰
         inline float GetYOffset() const { return m_YOffset; }
 
         EVENT_CLASS_TYPE(MouseScrolled)
             EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
-            // ÈÕÖ¾Êä³ö
+            // æ—¥å¿—è¾“å‡º
             std::string ToString() const override {
             std::stringstream ss;
             ss << "MouseScrolledEvent: " << GetXOffset() << ", " << GetYOffset();
@@ -73,28 +73,28 @@ namespace XEngine {
     };
 
     // ==============================================
-    // Êó±ê°´¼üÊÂ¼ş»ùÀà£¨°´ÏÂ¡¢ÊÍ·Å¶¼¼Ì³ĞËü£©
+    // é¼ æ ‡æŒ‰é”®äº‹ä»¶åŸºç±»ï¼ˆæŒ‰ä¸‹ã€é‡Šæ”¾éƒ½ç»§æ‰¿å®ƒï¼‰
     // ==============================================
     class X_API MouseButtonEvent : public Event
     {
     public:
-        // »ñÈ¡°´¼ü±àºÅ£¨×ó¼ü0£¬ÓÒ¼ü1£¬ÖĞ¼ü2£©
+        // è·å–æŒ‰é”®ç¼–å·ï¼ˆå·¦é”®0ï¼Œå³é”®1ï¼Œä¸­é”®2ï¼‰
         inline int GetMouseButton() const { return m_Button; }
 
         EVENT_CLASS_CATEGORY(EventCategoryMouse | EventCategoryInput)
 
     protected:
-        // ÊÜ±£»¤¹¹Ôìº¯Êı£¬Ö»ÄÜ×ÓÀàµ÷ÓÃ
+        // å—ä¿æŠ¤æ„é€ å‡½æ•°ï¼Œåªèƒ½å­ç±»è°ƒç”¨
         MouseButtonEvent(int button)
             : m_Button(button) {
         }
 
-        // ´æ´¢ÄÄ¸öÊó±ê°´¼ü±»²Ù×÷
+        // å­˜å‚¨å“ªä¸ªé¼ æ ‡æŒ‰é”®è¢«æ“ä½œ
         int m_Button;
     };
 
     // ==============================================
-    // Êó±ê°´¼ü°´ÏÂÊÂ¼ş
+    // é¼ æ ‡æŒ‰é”®æŒ‰ä¸‹äº‹ä»¶
     // ==============================================
     class X_API MouseButtonPressedEvent : public MouseButtonEvent
     {
@@ -103,7 +103,7 @@ namespace XEngine {
             : MouseButtonEvent(button) {
         }
 
-        // ÈÕÖ¾Êä³ö
+        // æ—¥å¿—è¾“å‡º
         std::string ToString() const override
         {
             std::stringstream ss;
@@ -115,7 +115,7 @@ namespace XEngine {
     };
 
     // ==============================================
-    // Êó±ê°´¼üÊÍ·ÅÊÂ¼ş
+    // é¼ æ ‡æŒ‰é”®é‡Šæ”¾äº‹ä»¶
     // ==============================================
     class X_API MouseButtonReleasedEvent : public MouseButtonEvent
     {
@@ -124,7 +124,7 @@ namespace XEngine {
             : MouseButtonEvent(button) {
         }
 
-        // ÈÕÖ¾Êä³ö
+        // æ—¥å¿—è¾“å‡º
         std::string ToString() const override
         {
             std::stringstream ss;

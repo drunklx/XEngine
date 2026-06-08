@@ -1,20 +1,23 @@
-#pragma once
+ï»¿#pragma once
 
 #include "XEngine/Layer.h"
 
 namespace XEngine
 {
-	// ImGuiäÖÈ¾²ã£¬¸ºÔğÒıÇæÖĞImguiµÄ³õÊ¼»¯¡¢äÖÈ¾¡¢ÊÂ¼şÀ¹½ØÓëÏú»Ù
+	// ImGuiæ¸²æŸ“å±‚ï¼Œè´Ÿè´£å¼•æ“ä¸­Imguiçš„åˆå§‹åŒ–ã€æ¸²æŸ“ã€äº‹ä»¶æ‹¦æˆªä¸é”€æ¯
 	class X_API ImguiLayer : public Layer
 	{
 	public:
-		ImguiLayer();                     // ¹¹Ôìº¯Êı£º³õÊ¼»¯ImguiLayer³ÉÔ±±äÁ¿
-		virtual ~ImguiLayer() = default;   // Îö¹¹º¯Êı£ºÄ¬ÈÏÊµÏÖ
+		ImguiLayer();                     // æ„é€ å‡½æ•°ï¼šåˆå§‹åŒ–ImguiLayeræˆå‘˜å˜é‡
+		virtual ~ImguiLayer() = default;   // ææ„å‡½æ•°ï¼šé»˜è®¤å®ç°
 
-		void OnAttach() override;          // ²ã±»Ìí¼ÓÊ±µ÷ÓÃ£º³õÊ¼»¯ImGuiÉÏÏÂÎÄ¡¢ÑùÊ½¡¢ºó¶Ë
-		void OnDetach() override;          // ²ã±»ÒÆ³ıÊ±µ÷ÓÃ£ºÊÍ·ÅImGui×ÊÔ´
-		void OnUpdate() override;          // Ã¿Ö¡¸üĞÂ£ºäÖÈ¾ImGui½çÃæ
+		void OnAttach() override;          // å±‚è¢«æ·»åŠ æ—¶è°ƒç”¨ï¼šåˆå§‹åŒ–ImGuiä¸Šä¸‹æ–‡ã€æ ·å¼ã€åç«¯
+		void OnDetach() override;          // å±‚è¢«ç§»é™¤æ—¶è°ƒç”¨ï¼šé‡Šæ”¾ImGuièµ„æº
+		virtual void OnImGuiRender() override;
+
+		void Begin();
+		void End();
 	private:
-		float m_Time=0;                     // ¼ÇÂ¼Ê±¼ä£¬ÓÃÓÚImGui¼ÆËãÖ¡¼ä¸ô
+		float m_Time=0;                     // è®°å½•æ—¶é—´ï¼Œç”¨äºImGuiè®¡ç®—å¸§é—´éš”
 	};
 }

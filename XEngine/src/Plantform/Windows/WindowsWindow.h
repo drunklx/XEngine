@@ -1,7 +1,6 @@
 #pragma once
 #include "XEngine/Window.h"
-
-#include <glad/glad.h>
+#include "XEngine/Renderer/GraphicsContext.h"
 #include <GLFW/glfw3.h>
 
 namespace XEngine {
@@ -21,6 +20,7 @@ namespace XEngine {
 		void Init(const WindowProps& props);
 		void Shutdown();
 	private:
+		GraphicsContext* m_Context;
 		GLFWwindow* m_Window;	
 		struct WindowData
 		{

@@ -1,31 +1,31 @@
-// Í·ÎÄ¼ş±£»¤ºê£¬·ÀÖ¹Í·ÎÄ¼ş±»ÖØ¸´°üº¬
+ï»¿// å¤´æ–‡ä»¶ä¿æŠ¤å®ï¼Œé˜²æ­¢å¤´æ–‡ä»¶è¢«é‡å¤åŒ…å«
 #pragma once
 
-// °üº¬ÊÂ¼ş»ùÀàÍ·ÎÄ¼ş£¬ËùÓĞÊÂ¼ş¶¼¼Ì³Ğ×ÔEvent
+// åŒ…å«äº‹ä»¶åŸºç±»å¤´æ–‡ä»¶ï¼Œæ‰€æœ‰äº‹ä»¶éƒ½ç»§æ‰¿è‡ªEvent
 #include "Event.h"
-// °üº¬ÒıÇæºËĞÄÍ·ÎÄ¼ş£¬¶¨ÒåÁËX_APIµ¼³öºêµÈ»ù´¡ÉèÊ©
+// åŒ…å«å¼•æ“æ ¸å¿ƒå¤´æ–‡ä»¶ï¼Œå®šä¹‰äº†X_APIå¯¼å‡ºå®ç­‰åŸºç¡€è®¾æ–½
 #include "XEngine/Core.h"
-// °üº¬Windows.h£¬¿ÉÄÜÓÃÓÚ´¦ÀíWindowsÌØ¶¨µÄÊÂ¼ş»ò¹¦ÄÜ
+// åŒ…å«Windows.hï¼Œå¯èƒ½ç”¨äºå¤„ç†Windowsç‰¹å®šçš„äº‹ä»¶æˆ–åŠŸèƒ½
 #include "Windows.h"
 
-// XÒıÇæÃüÃû¿Õ¼ä£¬±ÜÃâÃüÃû³åÍ»
+// Xå¼•æ“å‘½åç©ºé—´ï¼Œé¿å…å‘½åå†²çª
 namespace XEngine {
 
-    // ´°¿Ú´óĞ¡¸Ä±äÊÂ¼şÀà
+    // çª—å£å¤§å°æ”¹å˜äº‹ä»¶ç±»
     class X_API WindowResizeEvent : public Event
     {
     public:
-        // ¹¹Ôìº¯Êı£º´«Èë¸Ä±äºóµÄ´°¿Ú¿í¶ÈºÍ¸ß¶È
+        // æ„é€ å‡½æ•°ï¼šä¼ å…¥æ”¹å˜åçš„çª—å£å®½åº¦å’Œé«˜åº¦
         WindowResizeEvent(unsigned int width, unsigned int height)
             : m_Width(width), m_Height(height) {
         }
 
-        // »ñÈ¡´°¿Ú¿í¶È
+        // è·å–çª—å£å®½åº¦
         inline unsigned int GetWidth() const { return m_Width; }
-        // »ñÈ¡´°¿Ú¸ß¶È
+        // è·å–çª—å£é«˜åº¦
         inline unsigned int GetHeight() const { return m_Height; }
 
-        // ÖØĞ´»ùÀà·½·¨£º½«ÊÂ¼şĞÅÏ¢×ªÎª×Ö·û´®£¬ÓÃÓÚµ÷ÊÔ/ÈÕÖ¾Êä³ö
+        // é‡å†™åŸºç±»æ–¹æ³•ï¼šå°†äº‹ä»¶ä¿¡æ¯è½¬ä¸ºå­—ç¬¦ä¸²ï¼Œç”¨äºè°ƒè¯•/æ—¥å¿—è¾“å‡º
         std::string ToString() const override
         {
             std::stringstream ss;
@@ -33,30 +33,30 @@ namespace XEngine {
             return ss.str();
         }
 
-        // ºê¶¨Òå£ºÉèÖÃÊÂ¼şÀàĞÍÎªWindowResize
+        // å®å®šä¹‰ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ä¸ºWindowResize
         EVENT_CLASS_TYPE(WindowResize)
-            // ºê¶¨Òå£ºÉèÖÃÊÂ¼ş·ÖÀàÎªÓ¦ÓÃ³ÌĞòÊÂ¼ş
+            // å®å®šä¹‰ï¼šè®¾ç½®äº‹ä»¶åˆ†ç±»ä¸ºåº”ç”¨ç¨‹åºäº‹ä»¶
             EVENT_CLASS_CATEGORY(EventCategoryApplication)
 
     private:
-        // ´æ´¢´°¿ÚµÄ¿í¶ÈºÍ¸ß¶È
+        // å­˜å‚¨çª—å£çš„å®½åº¦å’Œé«˜åº¦
         unsigned int m_Width, m_Height;
     };
 
-    // ´°¿Ú¹Ø±ÕÊÂ¼şÀà
+    // çª—å£å…³é—­äº‹ä»¶ç±»
     class X_API WindowCloseEvent : public Event
     {
     public:
-        // ¹¹Ôìº¯Êı£ºÎŞ²ÎÊı
+        // æ„é€ å‡½æ•°ï¼šæ— å‚æ•°
         WindowCloseEvent() {}
 
-        // ºê¶¨Òå£ºÉèÖÃÊÂ¼şÀàĞÍÎªWindowClose
+        // å®å®šä¹‰ï¼šè®¾ç½®äº‹ä»¶ç±»å‹ä¸ºWindowClose
         EVENT_CLASS_TYPE(WindowClose)
-            // ºê¶¨Òå£ºÉèÖÃÊÂ¼ş·ÖÀàÎªÓ¦ÓÃ³ÌĞòÊÂ¼ş
+            // å®å®šä¹‰ï¼šè®¾ç½®äº‹ä»¶åˆ†ç±»ä¸ºåº”ç”¨ç¨‹åºäº‹ä»¶
             EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    // Ó¦ÓÃ³ÌĞòÊ±ÖÓµÎ´ğÊÂ¼ş£¨ÒıÇæÖ÷Ñ­»·Ã¿Ö¡´¥·¢£©
+    // åº”ç”¨ç¨‹åºæ—¶é’Ÿæ»´ç­”äº‹ä»¶ï¼ˆå¼•æ“ä¸»å¾ªç¯æ¯å¸§è§¦å‘ï¼‰
     class X_API AppTickEvent : public Event
     {
     public:
@@ -66,7 +66,7 @@ namespace XEngine {
             EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    // Ó¦ÓÃ³ÌĞòÂß¼­¸üĞÂÊÂ¼ş£¨Ã¿Ö¡Ö´ĞĞÓÎÏ·Âß¼­£©
+    // åº”ç”¨ç¨‹åºé€»è¾‘æ›´æ–°äº‹ä»¶ï¼ˆæ¯å¸§æ‰§è¡Œæ¸¸æˆé€»è¾‘ï¼‰
     class X_API AppUpdateEvent : public Event
     {
     public:
@@ -76,7 +76,7 @@ namespace XEngine {
             EVENT_CLASS_CATEGORY(EventCategoryApplication)
     };
 
-    // Ó¦ÓÃ³ÌĞòäÖÈ¾ÊÂ¼ş£¨Ã¿Ö¡Ö´ĞĞ»­Ãæ»æÖÆ£©
+    // åº”ç”¨ç¨‹åºæ¸²æŸ“äº‹ä»¶ï¼ˆæ¯å¸§æ‰§è¡Œç”»é¢ç»˜åˆ¶ï¼‰
     class X_API AppRenderEvent : public Event
     {
     public:
