@@ -1,6 +1,6 @@
 #include "xepch.h"
 #include"Buffer.h"
-#include "Renderer.h"											// For choosing suitable API
+#include "RendererAPI.h"											// For choosing suitable API
 
 #include "Plantform/OpenGL/OpenGLBuffer.h"						// For using subclass's constructor which is wrote by an API you want to
 //#include "Plantform/DirectX/DirtectXBuffer.h"					// So that initialize buffer as you liked
@@ -10,13 +10,13 @@ namespace XEngine{
 	/////////////////// VertexBuffer /////////////////////
 	//////////////////////////////////////////////////////
 	VertexBuffer* VertexBuffer::Create(float* vertices, uint32_t size) {
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::GetAPI())
 		{
-		case RendererAPI::None: X_CORE_ASSERT(false, "RendererAPI::None is currently not supported! ")
+		case RendererAPI::API::None: X_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported! ")
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLVertexBuffer(vertices, size);
-		case RendererAPI::DirectX: X_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported! ")
+		case RendererAPI::API::DirectX: X_CORE_ASSERT(false, "RendererAPI::API::DirectX is currently not supported! ")
 			return nullptr;
 		}
 
@@ -29,13 +29,13 @@ namespace XEngine{
 
 
 	IndexBuffer* IndexBuffer::Create(uint32_t* indices, uint32_t count) {
-		switch (Renderer::GetAPI())
+		switch (RendererAPI::GetAPI())
 		{
-		case RendererAPI::None: X_CORE_ASSERT(false, "RendererAPI::None is currently not supported! ")
+		case RendererAPI::API::None: X_CORE_ASSERT(false, "RendererAPI::API::None is currently not supported! ")
 			return nullptr;
-		case RendererAPI::OpenGL:
+		case RendererAPI::API::OpenGL:
 			return new OpenGLIndexBuffer(indices, count);
-		case RendererAPI::DirectX: X_CORE_ASSERT(false, "RendererAPI::DirectX is currently not supported! ")
+		case RendererAPI::API::DirectX: X_CORE_ASSERT(false, "RendererAPI::API::DirectX is currently not supported! ")
 			return nullptr;
 		}
 

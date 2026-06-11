@@ -42,14 +42,14 @@ namespace XEngine
 		LayoutElement() {}
 
 		LayoutElement(ShaderDataType type, const std::string& name, bool normalized = false)
-			:Type(type), Name(name), Size(ShaderDataTypeSize(type)), Offset(0), Count(GetComponentCount()), Normalized(normalized), GLType(XEngine::GetTypeToGLType(type))
+			:Type(type), Name(name), Size(ShaderDataTypeSize(type)), Offset(0), Count(GetComponentCount()), Normalized(normalized), GLType(GetTypeToGLType(type))
 			//这里的 Size 是某一个顶点属性中完整的一个分量的字节大小（x1,y1,z1）
 		{
 		}
 
 		uint32_t GetComponentCount() const {
 			switch (Type) {
-			case ShaderDataType::Float:	return 1;
+			case ShaderDataType::Float:		return 1;
 			case ShaderDataType::Float2:	return 2;
 			case ShaderDataType::Float3:	return 3;
 			case ShaderDataType::Float4:	return 4;
@@ -65,6 +65,23 @@ namespace XEngine
 			return 0;
 		}
 
+		uint32_t GetTypeToGLType(ShaderDataType type) {
+			switch (type) {
+			case ShaderDataType::Float:		return 0x1406;				//GL_FLOAT == 0x1406
+			case ShaderDataType::Float2:	return 0x1406;
+			case ShaderDataType::Float3:	return 0x1406;
+			case ShaderDataType::Float4:	return 0x1406;
+			case ShaderDataType::Int:		return 0x1404;				//GL_INT == 0x1404
+			case ShaderDataType::Int2:		return 0x1404;
+			case ShaderDataType::Int3:		return 0x1404;
+			case ShaderDataType::Int4:		return 0x1404;
+			case ShaderDataType::Mat3:		return 0x1406;
+			case ShaderDataType::Mat4:		return 0x1406;
+			case ShaderDataType::Bool:		return 0x8B56;				// GL_BOOL == 0x8B56
+			}
+			X_CORE_ASSERT(false, "Unknown ShaderDataType !");
+			return 0;
+		}
 
 
 

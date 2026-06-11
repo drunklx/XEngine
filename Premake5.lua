@@ -19,6 +19,7 @@ workspace "XEngine"
 	IncludeDir["GLFW"] = "XEngine/vendor/GLFW/include"
 	IncludeDir["Glad"] = "XEngine/vendor/Glad/include"
 	IncludeDir["Imgui"]= "XEngine/vendor/Imgui"
+	IncludeDir["glm"]  = "XEngine/vendor/glm"
 
 	include "XEngine/vendor/GLFW"
 	include "XEngine/vendor/Glad"
@@ -47,7 +48,9 @@ pchsource "XEngine/src/xepch.cpp"	-- 预编译头文件的源文件
 files
 {
 	"%{prj.name}/src/**.h",
-	"%{prj.name}/src/**.cpp"
+	"%{prj.name}/src/**.cpp",
+	"%{prj.name}/vendor/glm/glm/**.hpp",
+    "%{prj.name}/vendor/glm/glm/**.inl"
 }
 
 -- 头文件包含目录（让编译器能找到 spdlog）
@@ -57,7 +60,8 @@ includedirs
 	"%{prj.name}/src",
 	"%{IncludeDir.GLFW}",
 	"%{IncludeDir.Glad}",
-	"%{IncludeDir.Imgui}"
+	"%{IncludeDir.Imgui}",
+	"%{IncludeDir.glm}"                                                     --将IncludeDir表中glm键索引的值（地址）作为一个库文件路径
 }
 
 links

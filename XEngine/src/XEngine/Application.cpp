@@ -1,8 +1,7 @@
 #include "xepch.h"
 
 #include "Application.h"
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "Renderer/Renderer.h"
 
 #include"Input.h"
 
@@ -10,23 +9,7 @@ namespace XEngine
 {
 	Application* Application::s_Instance = nullptr;
 
-	uint32_t GetTypeToGLType(ShaderDataType type) {
-		switch (type) {
-		case ShaderDataType::Float:		return GL_FLOAT;
-		case ShaderDataType::Float2:	return GL_FLOAT;
-		case ShaderDataType::Float3:	return GL_FLOAT;
-		case ShaderDataType::Float4:	return GL_FLOAT;
-		case ShaderDataType::Int:		return GL_INT;
-		case ShaderDataType::Int2:		return GL_INT;
-		case ShaderDataType::Int3:		return GL_INT;
-		case ShaderDataType::Int4:		return GL_INT;
-		case ShaderDataType::Mat3:		return GL_FLOAT;
-		case ShaderDataType::Mat4:		return GL_FLOAT;
-		case ShaderDataType::Bool:		return GL_BOOL;
-		}
-		X_CORE_ASSERT(false, "Unknown ShaderDataType !");
-		return 0;
-	}
+	
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 	Application::Application()
@@ -39,9 +22,9 @@ namespace XEngine
 		m_ImguiLayer = new ImguiLayer();
 		PushOverlay(m_ImguiLayer);
 		
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
-
+		m_VertexArray.reset(VertexArray::Create());
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 0.8f, 0.2f, 0.8f, 1.0f,
@@ -59,22 +42,13 @@ namespace XEngine
 
 			m_VertexBuffer->SetLayout(layout);
 		}
-		const auto& layout = m_VertexBuffer->GetLayout();
-		// Vertex Attrib 
-		uint32_t index = 0;
-		for (const auto& element : layout)
-		{
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.Count, element.GLType,
-				element.Normalized ? GL_TRUE : GL_FALSE, layout.GetStride(), (const void*)element.Offset);
-			index++;
-		}
-
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 		uint32_t indices[3] = {
 			0,1,2
 		};
 
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(uint32_t)));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 		std::string vertexSrc = R"(
 			#version 330 core
@@ -107,6 +81,51 @@ namespace XEngine
 		)";
 
 		m_Shader.reset(new Shader(vertexSrc, fragmentSrc));
+		float squV[4 * 3] = {
+			-0.75, -0.75f,	-0.1f,
+			0.75f, -0.75f,	-0.1f,
+			0.75f,	0.75f,	-0.1f,
+			-0.75f,	0.75f,	-0.1f
+		};
+
+		unsigned int squI[6] = {
+			0,1,2,
+			2,3,0
+		};
+		squVAO.reset(VertexArray::Create());
+		BufferLayout squLayout =
+		{
+			{ ShaderDataType::Float3, "a_Position" }
+		};
+		std::shared_ptr<VertexBuffer> blueVB(VertexBuffer::Create(squV, sizeof(squV)));
+		blueVB->SetLayout(squLayout);
+		squVAO->AddVertexBuffer(blueVB);
+		
+
+		squVAO->SetIndexBuffer(std::shared_ptr<IndexBuffer>(IndexBuffer::Create(squI, sizeof(squI) / sizeof(uint32_t))));
+		std::string blueVSrc = R"(
+			#version 330 core
+			
+			layout(location = 0) in vec3 a_Position;
+
+			out vec3 v_Position;
+
+			void main()
+			{
+				gl_Position = vec4(a_Position, 1.0);
+			}
+		)";
+		std::string blueFSrc = R"(
+			#version 330 core
+
+			layout(location = 0) out vec4 a_Color;
+
+			void main()
+			{
+				a_Color = vec4(0.0,0.0,1.0,1.0);
+			}
+		)";
+		blueShader.reset(new Shader(blueVSrc, blueFSrc));
 
 	}
 
@@ -153,13 +172,14 @@ namespace XEngine
 		
 		while (m_Running)
 		{
-			glClearColor(0.1, 0.1, 0.1, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
-
+			RendererCommand::Clear();
+			RendererCommand::SetClearColor({ 0.1f,0.1f,0.1f,1.0f });
+			Renderer::BeginScene();
+			blueShader->Bind();
+			Renderer::Submit(std::shared_ptr<VertexArray>(squVAO));
 			m_Shader->Bind();
-
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES,m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			Renderer::Submit(m_VertexArray);
+			Renderer::EndScene();
 
 			for (Layer* layer : m_LayerStack)				//¸üÐÂÍ¼²ã
 			{
