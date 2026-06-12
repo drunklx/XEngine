@@ -76,7 +76,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>xepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;X_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;GLM_ENABLE_EXPERIMENTAL;X_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\Imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
@@ -100,7 +100,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>xepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;X_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;GLM_ENABLE_EXPERIMENTAL;X_RELEASE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\Imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -128,7 +128,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>xepch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
-      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;X_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>X_PLATFORM_WINDOWS;X_BUILD_DLL;GLFW_INCLUDE_NONE;GLM_ENABLE_EXPERIMENTAL;X_DIST;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>vendor\spdlog\include;src;vendor\GLFW\include;vendor\Glad\include;vendor\Imgui;vendor\glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -152,9 +152,8 @@
     </ProjectReference>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="src\Plantform\OpenGL\OpenGLRendererAPI.h" />
-    <ClInclude Include="src\XEngine\Renderer\RendererCommand.h" />
     <ClInclude Include="src\Plantform\OpenGL\OpenGLBuffer.h" />
+    <ClInclude Include="src\Plantform\OpenGL\OpenGLRendererAPI.h" />
     <ClInclude Include="src\Plantform\OpenGL\OpenGLVertexArray.h" />
     <ClInclude Include="src\Plantform\OpenGL\OpenglContext.h" />
     <ClInclude Include="src\Plantform\Windows\WindowsInput.h" />
@@ -176,8 +175,10 @@
     <ClInclude Include="src\XEngine\MouseButtonCodes.h" />
     <ClInclude Include="src\XEngine\Renderer\Buffer.h" />
     <ClInclude Include="src\XEngine\Renderer\GraphicsContext.h" />
-    <ClInclude Include="src\XEngine\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\XEngine\Renderer\OrthographicCamera.h" />
     <ClInclude Include="src\XEngine\Renderer\Renderer.h" />
+    <ClInclude Include="src\XEngine\Renderer\RendererAPI.h" />
+    <ClInclude Include="src\XEngine\Renderer\RendererCommand.h" />
     <ClInclude Include="src\XEngine\Renderer\Shader.h" />
     <ClInclude Include="src\XEngine\Renderer\VertexArray.h" />
     <ClInclude Include="src\XEngine\Window.h" />
@@ -603,10 +604,9 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Plantform\OpenGL\OpenGLRendererAPI.cpp" />
-    <ClCompile Include="src\XEngine\Renderer\RendererCommand.cpp" />
     <ClCompile Include="src\Plantform\OpenGL\OpenGLBuffer.cpp" />
     <ClCompile Include="src\Plantform\OpenGL\OpenGLContext.cpp" />
+    <ClCompile Include="src\Plantform\OpenGL\OpenGLRendererAPI.cpp" />
     <ClCompile Include="src\Plantform\OpenGL\OpenGLVertexArray.cpp" />
     <ClCompile Include="src\Plantform\Windows\WindowsInput.cpp" />
     <ClCompile Include="src\Plantform\Windows\WindowsWindow.cpp" />
@@ -617,8 +617,10 @@
     <ClCompile Include="src\XEngine\LayerStack.cpp" />
     <ClCompile Include="src\XEngine\Log.cpp" />
     <ClCompile Include="src\XEngine\Renderer\Buffer.cpp" />
-    <ClCompile Include="src\XEngine\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\OrthographicCamera.cpp" />
     <ClCompile Include="src\XEngine\Renderer\Renderer.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\RendererAPI.cpp" />
+    <ClCompile Include="src\XEngine\Renderer\RendererCommand.cpp" />
     <ClCompile Include="src\XEngine\Renderer\Shader.cpp" />
     <ClCompile Include="src\XEngine\Renderer\VertexArray.cpp" />
     <ClCompile Include="src\xepch.cpp">

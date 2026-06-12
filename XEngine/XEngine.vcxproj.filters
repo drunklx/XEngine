@@ -51,6 +51,9 @@
     <ClInclude Include="src\Plantform\OpenGL\OpenGLBuffer.h">
       <Filter>src\Plantform\OpenGL</Filter>
     </ClInclude>
+    <ClInclude Include="src\Plantform\OpenGL\OpenGLRendererAPI.h">
+      <Filter>src\Plantform\OpenGL</Filter>
+    </ClInclude>
     <ClInclude Include="src\Plantform\OpenGL\OpenGLVertexArray.h">
       <Filter>src\Plantform\OpenGL</Filter>
     </ClInclude>
@@ -114,10 +117,16 @@
     <ClInclude Include="src\XEngine\Renderer\GraphicsContext.h">
       <Filter>src\XEngine\Renderer</Filter>
     </ClInclude>
-    <ClInclude Include="src\XEngine\Renderer\RendererAPI.h">
+    <ClInclude Include="src\XEngine\Renderer\OrthographicCamera.h">
       <Filter>src\XEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\XEngine\Renderer\Renderer.h">
+      <Filter>src\XEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XEngine\Renderer\RendererAPI.h">
+      <Filter>src\XEngine\Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XEngine\Renderer\RendererCommand.h">
       <Filter>src\XEngine\Renderer</Filter>
     </ClInclude>
     <ClInclude Include="src\XEngine\Renderer\Shader.h">
@@ -1389,14 +1398,15 @@
     <ClInclude Include="vendor\glm\glm\vector_relational.hpp">
       <Filter>vendor\glm\glm</Filter>
     </ClInclude>
-    <ClInclude Include="src\XEngine\Renderer\RendererCommand.h" />
-    <ClInclude Include="src\Plantform\OpenGL\OpenGLRendererAPI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Plantform\OpenGL\OpenGLBuffer.cpp">
       <Filter>src\Plantform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Plantform\OpenGL\OpenGLContext.cpp">
+      <Filter>src\Plantform\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Plantform\OpenGL\OpenGLRendererAPI.cpp">
       <Filter>src\Plantform\OpenGL</Filter>
     </ClCompile>
     <ClCompile Include="src\Plantform\OpenGL\OpenGLVertexArray.cpp">
@@ -1429,10 +1439,16 @@
     <ClCompile Include="src\XEngine\Renderer\Buffer.cpp">
       <Filter>src\XEngine\Renderer</Filter>
     </ClCompile>
-    <ClCompile Include="src\XEngine\Renderer\RendererAPI.cpp">
+    <ClCompile Include="src\XEngine\Renderer\OrthographicCamera.cpp">
       <Filter>src\XEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\XEngine\Renderer\Renderer.cpp">
+      <Filter>src\XEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XEngine\Renderer\RendererAPI.cpp">
+      <Filter>src\XEngine\Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="src\XEngine\Renderer\RendererCommand.cpp">
       <Filter>src\XEngine\Renderer</Filter>
     </ClCompile>
     <ClCompile Include="src\XEngine\Renderer\Shader.cpp">
@@ -1444,7 +1460,5 @@
     <ClCompile Include="src\xepch.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\XEngine\Renderer\RendererCommand.cpp" />
-    <ClCompile Include="src\Plantform\OpenGL\OpenGLRendererAPI.cpp" />
   </ItemGroup>
 </Project>

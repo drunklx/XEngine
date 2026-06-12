@@ -1,0 +1,15 @@
+{
+    "version": 1,
+    "revision": 0,
+    "rules": [
+        {
+            "primary-output": "D:\\Env\\Microsoft\\Visuals\\Repos\\XEngine\\XEngine\\..\\bin-int\\Debug-windows-x86_64\\XEngine\\glm.obj",
+            "outputs": [
+                "D:\\Env\\Microsoft\\Visuals\\Repos\\XEngine\\XEngine\\..\\bin-int\\Debug-windows-x86_64\\XEngine\\glm.cppm.obj.dt.module.json",
+                "D:\\Env\\Microsoft\\Visuals\\Repos\\XEngine\\XEngine\\..\\bin-int\\Debug-windows-x86_64\\XEngine\\glm.cppm.obj.dt.d.json",
+                "D:\\Env\\Microsoft\\Visuals\\Repos\\XEngine\\XEngine\\..\\bin-int\\Debug-windows-x86_64\\XEngine\\XEngine.pch"
+            ],
+            "requires": []
+        }
+    ]
+}

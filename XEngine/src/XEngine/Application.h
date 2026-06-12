@@ -9,6 +9,7 @@
 #include "XEngine/Renderer/Shader.h"
 #include "XEngine/Renderer/Buffer.h"
 #include "XEngine/Renderer/VertexArray.h"
+#include "XEngine/Renderer/OrthographicCamera.h"
 namespace XEngine
 {
 	class X_API Application  
@@ -35,13 +36,14 @@ namespace XEngine
 			bool m_Running = true;
 			ImguiLayer* m_ImguiLayer;
 			LayerStack m_LayerStack;
-
+			OrthographicCamera m_Camera;
 			std::shared_ptr<Shader> m_Shader;
 			std::shared_ptr<VertexArray> m_VertexArray;
 
 
 			std::shared_ptr<Shader> blueShader;
 			std::shared_ptr<VertexArray> squVAO;
+
 
 		private:
 			static Application* s_Instance;

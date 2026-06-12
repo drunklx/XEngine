@@ -7,6 +7,6 @@
 [submodule "XEngine/vendor/Imgui"]
 	path = XEngine/vendor/Imgui
 	url = https://github.com/drunklx/imgui.git
-[submodule "XEngine/vendor/--force"]
-	path = XEngine/vendor/--force
+[submodule "XEngine/vendor/glm"]
+	path = XEngine/vendor/glm
 	url = https://github.com/drunklx/glm.git

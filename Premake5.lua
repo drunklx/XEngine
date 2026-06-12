@@ -79,7 +79,9 @@ filter "system:windows"
 	{
 		"X_PLATFORM_WINDOWS",	-- 标记当前是 Windows 系统
 		"X_BUILD_DLL",			-- 标记正在编译 DLL（用于导出符号）
-		"GLFW_INCLUDE_NONE"		-- 告诉 GLFW 不要包含 OpenGL 头文件（我们用 GLAD）"
+		"GLFW_INCLUDE_NONE",		-- 告诉 GLFW 不要包含 OpenGL 头文件（我们用 GLAD）"
+		"GLM_ENABLE_EXPERIMENTAL"
+		
 	}
 
 
@@ -134,7 +136,8 @@ project "Sandbox"
 	includedirs
 	{
 		"XEngine/vendor/spdlog/include",	-- 日志库
-		"XEngine/src"						-- 引擎头文件
+		"XEngine/src",						-- 引擎头文件
+		"%{IncludeDir.glm}"
 	}
 
 -- ==================== Windows 平台配置 ====================
